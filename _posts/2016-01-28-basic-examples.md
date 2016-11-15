@@ -86,8 +86,8 @@ OutWatch.render("#app", root)
 
 `combineLatest` takes another Observable and emits an element, whenever one of the original Observables emit.
 Here's a diagram to visualize exactly that:
----
----
+
+![CombineDiagram]({{ site.url }}/img/CombineMarbles.png)
 
 So now we've seen the `child` attribute in action multiple times, but what if we want multiple children.
 Instead of an Observable of a single element, we would need an Observable of a Sequence.
