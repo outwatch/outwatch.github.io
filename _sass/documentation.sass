@@ -1,0 +1,83 @@
+img.outwatch-home-logo
+    width: 5em
+    display: block
+    margin-bottom: $small-space
+
+.outwatch-home-link
+    font-family: $header-font
+    font-weight: bold
+
+.side-menu
+    position: fixed
+    top: $normal-space
+    height: 100%
+    overflow: hidden
+    font-size: 2.6vh
+    a
+        +anchor_style($black)
+    nav ul
+        white-space: nowrap
+    .github-link
+        border-bottom: none
+        &:hover
+            border-bottom: none
+            background-color: $almost-white
+            border-radius: 5px
+
+.paginator
+    a
+        +box_link()
+
+article
+    min-height: 500px
+    margin-top: $large-space
+    max-width: $max-article-width
+    margin-left: calc(#{$side-menu-width} + #{$normal-space})
+    overflow-x: visible
+    padding-top: 1px
+    blockquote
+        margin: 0
+        padding: 1px 1em
+        color: $gray-dark
+        background-color: $almost-white
+        h1, h2, h3, h4, h5, h6
+            text-align: left
+    th
+        border-bottom-width: 2px
+    th, td
+        border-color: $gray-lighter
+    header
+        text-align: center
+        h2
+            display: inline-block
+        .edit-post
+            @extend .mobile-hidden
+            font-size: 80%
+            top: $normal-space
+            right: $normal-space
+            position: absolute
+    h4
+        text-align: center
+    > div
+        margin-bottom: 2em
+    .paginator
+        display: flex
+        justify-content: space-between
+
+@media only screen and (max-width: 680px)
+    .side-menu
+        position: relative
+        width: inherit
+        height: inherit
+        font-size: 150%
+        padding-bottom: $normal-space
+        border-bottom: 2px solid $gray-lighter
+        margin-bottom: $normal-space
+        ul > li
+            padding-top: 0.5em
+    article
+        margin-left: 0
+
+@media only screen and (min-height: 800px)
+    .side-menu
+        font-size: 24px

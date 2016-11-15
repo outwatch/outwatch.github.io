@@ -1,0 +1,15 @@
+title: "OutWatch"
+author: "Luka Jacobowitz"
+description: "A functional and reactive UI framework based on Rx and VirtualDom"
+more: "read more"
+url: "http://outwatch.github.io/"
+permalink: none
+
+excerpt_separator: "\n\n\n"
+defaults: [{scope: {path: ""}, values: {layout: "default"}}, {scope: {path: "", type: "posts"}, values: {comments: true}}]
+gems:
+  - octopress-autoprefixer
+  - kramdown
+  - jekyll-redirect-from
+whitelist:
+  - jekyll-redirect-from
