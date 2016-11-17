@@ -12,7 +12,7 @@ object HelloWorld extends JSApp {
     val node = div(
       input(tpe := "text", placeholder := "Name", input --> names),
       hr(),
-      h2("Hello ", child <-- namesmap(ev => ev.target.value))
+      h2("Hello ", child <-- names.map(ev => ev.target.value))
     )
 
     OutWatch.render("#app", node)
