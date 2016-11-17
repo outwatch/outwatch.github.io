@@ -3,16 +3,15 @@
 {% highlight scala %}
 import scala.scalajs.js.JSApp
 import outwatch.dom._
-import outwatch.dom.helpers.InputEvent
 
 object HelloWorld extends JSApp {
   def main() = {
-    val names = createHandler[InputEvent]
+    val names = createInputHandler()
     
     val node = div(
       input(tpe := "text", placeholder := "Name", input --> names),
       hr(),
-      h2("Hello ", child <-- names.map(ev => ev.target.value))
+      h2("Hello ", child <-- names.map(_.target.value))
     )
 
     OutWatch.render("#app", node)
