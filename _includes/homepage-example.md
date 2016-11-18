@@ -6,12 +6,12 @@ import outwatch.dom._
 
 object HelloWorld extends JSApp {
   def main() = {
-    val names = createStringSink()
+    val names = createInputHandler()
     
     val node = div(
       input(tpe := "text", placeholder := "Name", input --> names),
       hr(),
-      h2("Hello ", child <-- names)
+      h2("Hello ", child <-- names.map(_.target.value))
     )
 
     OutWatch.render("#app", node)
