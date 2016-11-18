@@ -6,7 +6,7 @@ import outwatch.dom._
 
 object HelloWorld extends JSApp {
   def main() = {
-    val names = createStringSink()
+    val names = createStringHandler()
     
     val node = div(
       input(placeholder := "Name", inputString --> names),
