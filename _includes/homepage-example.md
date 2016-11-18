@@ -9,7 +9,7 @@ object HelloWorld extends JSApp {
     val names = createStringSink()
     
     val node = div(
-      input(tpe := "text", placeholder := "Name", input --> names),
+      input(placeholder := "Name", inputString --> names),
       hr(),
       h2("Hello ", child <-- names)
     )
