@@ -400,7 +400,7 @@ First let's check out the new `todoComponent`:
 +    button(click(RemoveTodo(todo)) --> storeSink, "Delete")
   )
 }
-
+{% endhighlight %}
 This
 
 ---
