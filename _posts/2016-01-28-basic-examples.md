@@ -165,16 +165,9 @@ In our [next chapter](), we're going to be looking at how we can encapsulate our
 
 
 
-## Three main goals of OutWatch
-
-1. Updating DOM efficiently without sacrificing abstraction => Virtual DOM
-2. Handling subscriptions automatically
-3. Removing or restricting the need for Higher Order Observables
 
 
-(they're actually implemented with Subjects under the hood,
-but don't expose the `next` or `completed` functions,
-which are usually used when one doesn't understand how to solve something the reactive way)
+
 
 
 
