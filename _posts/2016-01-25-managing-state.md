@@ -397,37 +397,58 @@ First let's check out the new `todoComponent`:
   li(
     span(todo),
 -    button(click(todo) --> deleteEvents, "Delete")
-+    button(click(RemoveTodo(todo)) --> storeSink, "Delete")
++    button(click(RemoveTodo(todo)) --> store, "Delete")
   )
 }
+{% endhighlight %}
+This change is fairly easy to grasp.
+We dispatch `RemoveTodo` actions to our store when we click the delete button.
+The `textFieldComponent` is gonna have a bit more changes.
 
-This
+Let's look at it now.
 
----
+{% highlight scala %}
+def textFieldComponent() = {
+  val inputValues = createStringHandler()
+
+  val disabledValues = inputValues
+    .map(_.length < 4)
+    .startWith(true)
+
+  val submissions = createHandler[String]
+
+  val addActions = submissions
+    .map(todo => AddTodo(todo))
+
+  store <-- addActions
+
+  div(
+    label("Todo: "),
+    input(inputString --> inputValues),
+    button(
+      click(inputValues) --> submissions,
+      disabled <-- disabledValues,
+      "Submit"
+    )
+  )
+}
+{% endhighlight %}
+
+A few things have changed here, but I'm sure by now you can understand what we're doing here.
+The only thing I'd like to call attention to, is this line:
+
+{% highlight scala %}
+store <-- addActions
+{% endhighlight %}
+
+Our `store` is just a `Sink` and, if their types match up, we can use any Observable and pipe all it's emissions into a `Sink` by using the left facing arrow `<--`.
+In this case we have a `Sink[Action]` and an `Observable[Action]`, so this just works.
+This is another way in which OutWatch allows you to manipulate event streams in a declarative matter.
+
+However, the reason why we've waited so long to show you this method, is because delegating from one Observable to another like this, can lead to misdirection and confusion in debugging. So don't rely on it too much and only use it when you don't see another option.
+
+### Conclusion
 
 In this chapter we wanted to give you a good overview over the similarities and differences between these two architectural styles.
 In the end it's up to you decide which architecture best suits your app.
 So keep the trade-offs in mind and make an informed decision on what's best for your application.
-
-
-{% highlight scala %}
-type State = List[String]
-{% endhighlight %}
-
-Right now, our app state is just a list of todos, but if we increase the scope of our app, this `State` type would become more and more complex.
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Redux style counter application w/ reducers
--- Single source of truth
-//OutWatch style counter application
