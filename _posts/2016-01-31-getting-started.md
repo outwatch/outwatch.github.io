@@ -4,7 +4,49 @@ tags: chapters
 ---
 
 
-First you will need to install Java and SBT if you haven't already.
+First things first, in order to use OutWatch you will need to have Java and SBT installed.
+Check out this guide for Java and this guide for SBT if you're unsure how to proceed.
+
+<h2 id="sbt-new">Using sbt new</h2>
+
+The fastest and easiest way to create a new OutWatch application is by using `sbt new`.
+Note that this requires sbt version `0.13.13`, so update to that version if you don't have it yet.
+
+{% highlight text %}
+$ sbt new outwatch/seed.g8
+{% endhighlight %}
+
+This will create a prompt to create your first project. It will be in a new directory of your given name.
+To compile your Scala code to JavaScript simply run:
+
+{% highlight text %}
+$ cd <your-project-name>
+$ sbt fastOptJS
+{% endhighlight %}
+
+Then open the `index.html` file in your browser to see what you just created.
+
+### Opening your project in IntelliJ
+
+To open your project in IntelliJ IDEA (Community or Ultimate Edition doesn't matter), simply go to `File -> Open` and then choose the directory you just created.
+IntelliJ should now start indexing the files and be ready shortly.
+
+
+
+### Recompiling your files as needed
+
+Retyping `fastOptJS` every time we want to compile can get quite annoying and inefficient.
+Luckily, in `sbt`, we can run every command in watch mode by simply adding a tilde `~` in front of it.
+{% highlight text %}
+$ sbt
+> ~fastOptJS
+[success] (...)
+1. Waiting for source changes... (press enter to interrupt)
+{% endhighlight %}
+
+And voila, you've created your first working developer environment. You can skip the rest of this chapter if everything worked for you.
+
+## Creating an OutWatch project from scratch
 
 Create a new SBT project and add the ScalaJS plugin to your `plugins.sbt`.
 Then add the following line to your `build.sbt`.
@@ -60,25 +102,3 @@ $ sbt
 {% endhighlight %}
 
 And with that, we're done, check your browser, to see what we just created (it's not that special, but it's something).
-
-### Recompiling your files as needed
-
-Retyping `fastOptJS` every time we want to compile can get quite annoying and inefficient.
-Luckily, in `sbt`, we can run every command in watch mode by simply adding a tilde `~` in front of it.
-{% highlight text %}
-$ sbt
-> ~fastOptJS
-[success] (...)
-1. Waiting for source changes... (press enter to interrupt)
-{% endhighlight %}
-
-
-<h2 id="sbt-new">Using sbt new</h2>
-
-The fastest way to create a new OutWatch application is by using `sbt new`.
-
-{% highlight text %}
-sbt new outwatch/seed.g8
-{% endhighlight %}
-
-This will create a prompt to create your first project.
