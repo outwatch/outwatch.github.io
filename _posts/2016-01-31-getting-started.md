@@ -4,8 +4,8 @@ tags: chapters
 ---
 
 
-First things first, in order to use OutWatch you will need to have Java and SBT installed.
-Check out this guide for Java and this guide for SBT if you're unsure how to proceed.
+First things first, in order to use OutWatch you will need to have Java and sbt installed.
+Check out [this guide](https://java.com/en/download/help/download_options.xml) for Java and [this guide](http://www.scala-sbt.org/release/docs/Setup.html) for sbt if you're unsure how to proceed.
 
 <h2 id="sbt-new">Using sbt new</h2>
 
