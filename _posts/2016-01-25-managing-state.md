@@ -400,12 +400,19 @@ First let's check out the new `todoComponent`:
 +    button(click(RemoveTodo(todo)) --> store, "Delete")
   )
 }
+<<<<<<< HEAD
 {% endhighlight %}
+=======
+
+{% endhighlight %}
+
+>>>>>>> 41356a3f63dbf3a2895d08bf3c7f366f82385b3c
 This change is fairly easy to grasp.
 We dispatch `RemoveTodo` actions to our store when we click the delete button.
 The `textFieldComponent` is gonna have a bit more changes.
 
 Let's look at it now.
+<<<<<<< HEAD
 
 {% highlight scala %}
 def textFieldComponent() = {
@@ -446,6 +453,50 @@ In this case we have a `Sink[Action]` and an `Observable[Action]`, so this just 
 This is another way in which OutWatch allows you to manipulate event streams in a declarative matter.
 
 However, the reason why we've waited so long to show you this method, is because delegating from one Observable to another like this, can lead to misdirection and confusion in debugging. So don't rely on it too much and only use it when you don't see another option.
+=======
+
+{% highlight scala %}
+def textFieldComponent() = {
+  val inputValues = createStringHandler()
+
+  val disabledValues = inputValues
+    .map(_.length < 4)
+    .startWith(true)
+
+  val submissions = createHandler[String]
+
+  val addActions = submissions
+    .map(todo => AddTodo(todo))
+
+  store <-- addActions
+
+  div(
+    label("Todo: "),
+    input(inputString --> inputValues),
+    button(
+      click(inputValues) --> submissions,
+      disabled <-- disabledValues,
+      "Submit"
+    )
+  )
+}
+{% endhighlight %}
+
+A few things have changed here, but I'm sure by now you can understand what we're doing here.
+The only thing I'd like to call attention to, is this line:
+
+{% highlight scala %}
+store <-- addActions
+{% endhighlight %}
+
+Our `store` is just a `Sink` and, if their types match up, we can use any Observable and pipe all it's emissions into a `Sink` by using the left facing arrow `<--`.
+In this case we have a `Sink[Action]` and an `Observable[Action]`, so this just works.
+This is another way in which OutWatch allows you to manipulate event streams in a declarative matter.
+
+However, the reason why we've waited so long to show you this method, is because delegating from one Observable to another like this, can lead to misdirection and confusion in debugging. So don't rely on it too much and only use it when you don't see another option.
+
+And with that, we've fully reimplemented our two small apps with very little effort.
+>>>>>>> 41356a3f63dbf3a2895d08bf3c7f366f82385b3c
 
 ### Conclusion
 

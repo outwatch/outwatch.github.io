@@ -161,7 +161,7 @@ input(inputType := "text", inputString --> strings)
 {% endhighlight %}
 
 
-In our [next chapter](), we're going to be looking at how we can encapsulate our code into small reusable components.
+In our [next chapter](/components), we're going to be looking at how we can encapsulate our code into small reusable components.
 
 
 
