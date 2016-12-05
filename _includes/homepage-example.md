@@ -1,4 +1,9 @@
+<div class="example-hello-world-setup">
+{% highlight text %}
+$ sbt new outwatch/seed.g8
+{% endhighlight %}
 
+</div>
 <div class="example-hello-world-code">
 {% highlight scala %}
 import scala.scalajs.js.JSApp
