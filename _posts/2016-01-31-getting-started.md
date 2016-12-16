@@ -52,7 +52,7 @@ And voila, you've created your first working developer environment. You can skip
 Create a new SBT project and add the ScalaJS plugin to your `plugins.sbt`.
 Then add the following line to your `build.sbt`.
 {% highlight scala %}
-libraryDependencies += "org.outwatch" %%% "outwatch" % "0.5.0"
+libraryDependencies += "org.outwatch" %%% "outwatch" % "0.5.2"
 {% endhighlight %}
 Great, we've created our first OutWatch Project!
 
