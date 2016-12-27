@@ -52,18 +52,18 @@ And voila, you've created your first working developer environment. You can skip
 Create a new SBT project and add the ScalaJS plugin to your `plugins.sbt`.
 Then add the following line to your `build.sbt`.
 {% highlight scala %}
-libraryDependencies += "org.outwatch" %%% "outwatch" % "0.5.2"
+libraryDependencies += "io.github.outwatch" %%% "outwatch" % "0.5.2"
 {% endhighlight %}
 Great, we've created our first OutWatch Project!
 
 Now we'll create a small Hello World app to get you started.
 First we'll create a new Scala file `HelloOutWatch.scala` in our main directory.
-Inside we'll want to import the framework by specifying `import surge.dom._` at the top of our file.
+Inside we'll want to import the framework by specifying `import outwatch.dom._` at the top of our file.
 We also need to import the Scala.js main class: `import scala.scalajs.js.JSApp`
 Now we're ready to create our main entry point:
 {% highlight scala %}
 import scala.scalajs.js.JSApp
-import surge.dom._
+import outwatch.dom._
 
 object HelloOutWatch extends JSApp {
   def main(): Unit = {
