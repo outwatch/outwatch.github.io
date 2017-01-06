@@ -107,7 +107,7 @@ Sounds awfully useful, doesn't it?
 
 Nevertheless we're gonna try and tackle this.
 We're gonna map each emited value to a List and fill it with `n` `img` elements.
-Also to make it easy, we divide every value by `2`,
+Also to make it easy, we divide every value by `10`,
 because by default HTML Range sliders will go from `0` to `100`:
 
 {% highlight scala %}

@@ -20,8 +20,8 @@ val subtractions = createHandler[Int]
 
 val root = div(
   div(
-    button(click(1) --> plusClicks, "+"),
-    button(click(-1) --> handleMinus, "-"),
+    button(click(1) --> additions, "+"),
+    button(click(-1) --> subtractions, "-"),
     span("Count: ")
   )
 )
@@ -54,6 +54,7 @@ Great, now we're almost there!
 Now we only need to keep state somehow. If you remember the `scan` operator from our [Streams chapter](/streams#scan), you're on the right path.
 
 Here's a quick reminder on what it does:
+
 > `scan` is a lot like `fold` or `reduce` but creates intermediary values every time.
 >Folds in functional programming iterate a sequential data structure like a list and
 > "reduces" or "folds" it into a single element.
@@ -149,7 +150,7 @@ def todoComponent(todo: String, deleteEvents: Sink[String]) = {
 
 Okay, that's easy too, we emit the todos to our "Delete stream".
 Now comes the more tricky part. We're gonna have to merge those two streams and keep state between emissions.
-With numbers it was kinda easy, but list's can be a bit trickier.
+With numbers it was kinda easy, but lists can be a bit trickier.
 
 Let's look at some code:
 
@@ -186,7 +187,7 @@ So what can we do with this kind of stream? Well `scan` of course!
 //..
 
 - val merged = additions.merge(deletions)
-+ val state = adds.merge(deletes)
++ val state = additions.merge(deletions)
 +   .scan(List[String]())((list, modify) => modify(list))
 
 {% endhighlight %}

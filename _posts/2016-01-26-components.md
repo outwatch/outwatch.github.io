@@ -50,6 +50,7 @@ ___
 
 
 Next we're going to look at a component that takes an `Observable` as a parameter.
+
 ### Input streams
 
 When we pass an Observable into a component, it usually means the component is going to change whenever the Observable emits an element.
@@ -118,7 +119,7 @@ def buttonComponent(labelText: String, textValues: Sink[String]) = {
 {% endhighlight %}
 
 This isn't a very useful component, but it demonstrates two things.
-First, how easy it is to replace components, if they have the same signature and second, that we can take any DOM event, and write a value after it in parantheses to transform each emission to the value in the brackets.
+First, how easy it is to replace components, if they have the same signature and second, that we can take any DOM event, and write a value after it in parentheses to transform each emission to the value in the brackets.
 
 This is roughly equivalent to calling the `mapTo` operator on the resulting `Observable` and allows us to declare emissions in a more concise way.
 In most of our use cases, we don't really care about the `MouseEvent`, that the `click` event emits.
