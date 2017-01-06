@@ -50,6 +50,7 @@ ___
 
 
 Next we're going to look at a component that takes an `Observable` as a parameter.
+
 ### Input streams
 
 When we pass an Observable into a component, it usually means the component is going to change whenever the Observable emits an element.
