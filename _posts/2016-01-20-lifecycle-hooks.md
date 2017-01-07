@@ -12,7 +12,7 @@ Use it like this:
 
 {% highlight scala %}
 
-val sideEffectSink = Sink.create[Unit](_ => /* your side effect here */ )
+val sideEffectSink = Sink.create[Unit](_ => /* your side effect here */)
 
 div(insert --> sideEffectSink)
 
