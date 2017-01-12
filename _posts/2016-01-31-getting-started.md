@@ -6,7 +6,7 @@ tags: chapters
 
 
 First things first, in order to use OutWatch you will need to have Java and sbt installed.
-Check out [this guide](https://java.com/en/download/help/download_options.xml) for Java and [this 
+Check out [this guide](https://java.com/en/download/help/download_options.xml) for Java and [this guide](http://www.scala-sbt.org/release/docs/Setup.html) for sbt if you're unsure how to proceed.
 
 <h2 id="sbt-new">Using sbt new</h2>
 
@@ -52,7 +52,7 @@ And voila, you've created your first working developer environment. You can skip
 Create a new SBT project and add the ScalaJS plugin to your `plugins.sbt`.
 Then add the following line to your `build.sbt`.
 {% highlight scala %}
-libraryDependencies += "io.github.outwatch" %%% "outwatch" % "0.6.0"
+libraryDependencies += "io.github.outwatch" %%% "outwatch" % "0.7.0"
 {% endhighlight %}
 Great, we've created our first OutWatch Project!
 
