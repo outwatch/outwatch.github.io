@@ -248,8 +248,8 @@ For our small counter app, these are gonna be very very simple.
 {% highlight scala %}
 sealed trait Action
 
-case class Add() extends Action
-case class Subtract() extends Action
+case object Add extends Action
+case object Subtract extends Action
 {% endhighlight %}
 
 This is fairly straightforward. Now let's add a model for our application state and an initial value for that model.
@@ -272,8 +272,8 @@ This looks eerily similar to the functions we usually pass to our `scan` functio
 
 {% highlight scala %}
 def reducer(previousState: Int, action: Action) = action match {
-  case Add() => previousState + 1
-  case Subtract() => previousState - 1
+  case Add => previousState + 1
+  case Subtract => previousState - 1
 }
 {% endhighlight %}
 
@@ -298,8 +298,8 @@ Now we can rewrite our view very easily:
 
 {% highlight scala %}
 div(
- button(click(Add()) --> storeSink, "+"),
- button(click(Subtract()) --> storeSink, "-"),
+ button(click(Add) --> storeSink, "+"),
+ button(click(Subtract) --> storeSink, "-"),
  span("Count: ", child <-- storeSource)
 )
 {% endhighlight %}
@@ -336,11 +336,11 @@ With that knowledge in mind, we can refactor our code like this:
 + val store = Store(0, reducer)
 
 div(
-- button(click(Add()) --> storeSink, "+"),
-- button(click(Subtract()) --> storeSink, "-"),
+- button(click(Add) --> storeSink, "+"),
+- button(click(Subtract) --> storeSink, "-"),
 - span("Count: ", child <-- storeSource)
-+ button(click(Add()) --> store, "+"),
-+ button(click(Subtract()) --> store, "-"),
++ button(click(Add) --> store, "+"),
++ button(click(Subtract) --> store, "-"),
 + span("Count: ", child <-- store)
 )
 {% endhighlight %}
