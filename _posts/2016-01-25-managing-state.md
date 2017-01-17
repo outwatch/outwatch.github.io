@@ -271,7 +271,7 @@ It's going to have the following type:
 This looks eerily similar to the functions we usually pass to our `scan` function. Let's just keep that in the back of our mind fow now and start implementing this function:
 
 {% highlight scala %}
-def reducer(previousState: Int, action: Action) = action match {
+def reducer(previousState: State, action: Action) = action match {
   case Add => previousState + 1
   case Subtract => previousState - 1
 }
@@ -356,11 +356,8 @@ sealed trait Action
 case class AddTodo(todo: String) extends Action
 case class RemoveTodo(todo: String) extends Action
 
-Object State {
 
-}
-
-Object Main extends JSApp {
+object Main extends JSApp {
 
   val initialState = List[String]()
 
