@@ -389,7 +389,7 @@ The only thing actually left to do now, is refactor our `textFieldComponent` and
 
 First let's check out the new `todoComponent`:
 
-{% highlight scala %}
+{% highlight diff %}
 - def todoComponent(todo: String, deleteEvents: Sink[String]) = {
 + def todoComponent(todo: String) = {
   li(
