@@ -6,6 +6,12 @@ layout: blank
         <a href="/" class="outwatch-home-link">
           <img class="outwatch-home-logo" src="/img/outwatch_logo.svg" alt="logo"/>
         </a>
+        <h3>Getting Started</h3>
+        <ul>
+          {% for chapter in site.tags.intro %}
+          <li>{% if page.id == chapter.id %}<strong><a href="{{ chapter.url }}">{{ chapter.title }}</a></strong>{% else %}<a href="{{ chapter.url }}">{{ chapter.title }}{% endif %}</a></li>
+          {% endfor %}
+        </ul>
         <h3>Tutorial</h3>
         <ul>
           {% for chapter in site.tags.chapters %}
@@ -22,23 +28,20 @@ layout: blank
       <article id="content">
         <header>
           <h2>{{ page.title }}</h2>
-          {% if page.path %}
-            <a class="edit-post" title="Edit on Github" href="{{ page.path | prepend: 'https://github.com/outwatch/outwatch.github.io/edit/master/' }}">Edit on GitHub <i class="fa fa-edit"></i></a>
-          {% endif %}
         </header>
         <div>
 {{ content }}
         </div>
         <div class="mobile-hidden">
           <div class="paginator">
-            <span>{% if page.next %}<a href="{{ page.next.url }}"><i class="fa fa-long-arrow-left"></i></a>{% endif %}</span>
-            <span>{% if page.previous %}<a href="{{ page.previous.url }}"><i class="fa fa-long-arrow-right"></i></a>{% endif %}</span>
+            <span>{% if page.next %}<a onclick="window.location='{{ page.next.url }}'+window.location.search;"><i class="fa fa-long-arrow-left"></i></a>{% endif %}</span>
+            <span>{% if page.previous %}<a onclick="window.location='{{ page.previous.url }}'+window.location.search;"><i class="fa fa-long-arrow-right"></i></a>{% endif %}</span>
           </div>
         </div>
         <div class="mobile-shown">
           <div class="paginator mobile-shown">
-            <span>{% if page.next %}<a href="{{ page.next.url }}#content"><i class="fa fa-long-arrow-left"></i></a>{% endif %}</span>
-            <span>{% if page.previous %}<a href="{{ page.previous.url }}#content"><i class="fa fa-long-arrow-right"></i></a>{% endif %}</span>
+            <span>{% if page.next %}<a onclick="window.location='{{ page.next.url }}#content' + window.location.search;"><i class="fa fa-long-arrow-left"></i></a>{% endif %}</span>
+            <span>{% if page.previous %}<a onclick="window.location='{{ page.previous.url }}#content' + window.location.search;"><i class="fa fa-long-arrow-right"></i></a>{% endif %}</span>
           </div>
         </div>
 {% include footer.html %}

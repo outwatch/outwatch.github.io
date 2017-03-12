@@ -1,8 +1,7 @@
 ---
-title:  "Getting Started"
-tags: chapters
+title:  "Get started with Scala"
+tags: intro
 ---
-
 
 
 First things first, in order to use OutWatch you will need to have Java and sbt installed.

@@ -1,0 +1,36 @@
+<style>
+div.tab-lang {
+    overflow: hidden;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1em;
+}
+
+/* Style the links inside the tab */
+div.tab-lang a {
+    float: right;
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+    border-bottom: 0px solid #ccc;
+    margin-bottom: 2px;
+}
+
+/* Change background color of links on hover */
+div.tab-lang a:hover {
+    background-color: #555;
+    color: #eee;
+}
+
+/* Create an active/current tablink class */
+div.tab-lang a.active {
+    background-color: #333;
+    color: #eee; !important
+    border-bottom: 1px solid #333;
+}
+</style>
+<script src="js/switch-lang.js"></script>
+<script> checkLang() </script>
