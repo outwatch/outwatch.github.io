@@ -1,6 +1,6 @@
 function checkLang() {
   var previousLang = getUrlParameter("lang")
-  var currentLang = previousLang || "scala"
+  var currentLang = previousLang || (localStorage.getItem("lang") || "scala")
   if (!previousLang){
     document.location = document.URL + "?lang=" + currentLang
   }
@@ -19,6 +19,8 @@ function getUrlParameter(name) {
 };
 
 function showOnly(lang) {
+
+  localStorage.setItem("lang", lang)
 
   var langToHide = lang == "scala" ? "purescript" : "scala"
 
