@@ -38,7 +38,7 @@ object HelloWorld extends JSApp {
 module Main where
 
 import OutWatch
-import OutWatch (render) as OutWatch
+import OutWatch.Core (render) as OutWatch
 
 main =
   let names = createStringHandler[]

@@ -76,7 +76,6 @@ Retyping `pulp browserify` every time we want to compile can get quite annoying 
 Luckily, with `pulp`, we can run every command in watch mode by simply adding the `--watch` flag in front of it.
 {% highlight text %}
 $ pulp --watch browserify --to index.js
-> ~fastOptJS
 Build successful.
 Browserifying...
 Browserified.
