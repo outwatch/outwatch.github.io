@@ -27,7 +27,7 @@ function showOnly(lang) {
   var activeTabs = document.querySelectorAll(".lang-specific." + langToHide)
   for (var i = 0; i < activeTabs.length; ++i) {
     var item = activeTabs[i]
-    if (item.tagName == 'SPAN' || item.tagName == "DIV"){
+    if (item.tagName == 'SPAN' || item.tagName == "DIV" || item.tagName == "BLOCKQUOTE"){
       item.hidden = true
     } else {
       item.classList.remove("active")
@@ -36,7 +36,7 @@ function showOnly(lang) {
   var currentTabs = document.querySelectorAll(".lang-specific." + lang)
   for (var i = 0; i < currentTabs.length; ++i) {
     var item = currentTabs[i]
-    if (item.tagName == 'SPAN' || item.tagName == "DIV"){
+    if (item.tagName == 'SPAN' || item.tagName == "DIV" || item.tagName == "BLOCKQUOTE"){
       item.hidden = false
     } else {
       item.className += ' active'
