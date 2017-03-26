@@ -70,9 +70,7 @@ div(update --> updateEffectSink)
 {% highlight haskell %}
 
 let updateEffectSink =
-      Sink.create (\t -> case t of
-          (Tuple old cur) -> {- your side effect here -}
-      )
+      Sink.create (\(Tuple old cur) -> {- your side effect here -} )
 
 in div[update ==> updateEffectSink]
 {% endhighlight %}
