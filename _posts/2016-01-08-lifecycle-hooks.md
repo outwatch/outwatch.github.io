@@ -24,7 +24,7 @@ div(insert --> sideEffectSink)
 {% highlight haskell %}
 hookDemo :: forall e. VDom e
 hookDemo =
-  let sideEffectSink = Sink.createSink {- your side effect here -}
+  let sideEffectSink = Sink.create {- your side effect here -}
 
   in div[insert ==> sideEffectSink]
 
@@ -70,9 +70,7 @@ div(update --> updateEffectSink)
 {% highlight haskell %}
 
 let updateEffectSink =
-      createSink (\t -> case t of
-          (Tuple old cur) -> {- your side effect here -}
-      )
+      Sink.create (\(Tuple old cur) -> {- your side effect here -} )
 
 in div[update ==> updateEffectSink]
 {% endhighlight %}
