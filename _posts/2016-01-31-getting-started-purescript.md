@@ -1,5 +1,5 @@
 ---
-title:  "Get started with PureScript"
+title:  "Get started with <br> PureScript"
 tags: intro
 ---
 
