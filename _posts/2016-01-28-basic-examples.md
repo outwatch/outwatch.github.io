@@ -167,7 +167,7 @@ so `toggleEvents` emits an event every time our checkbox is changed.
 
 Now the last thing to note is that we write `tpe` instead of `type`, because `type` is a keyword.
 We could've also written `inputType`<span class="lang-specific scala" markdown="1"> or `type` in backticks</span>.
-For more on differences between HTML and the DOM DSL check [here]().
+For more on differences between HTML and the DOM DSL check <a onclick="window.location='/dom'+window.location.search;">here</a>.
 
 Our next example is going to be a very simple example with two input fields, for first and last name.
 We then want to combine those two fields into full name that will update when either field changes.
