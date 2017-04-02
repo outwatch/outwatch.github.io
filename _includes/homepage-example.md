@@ -37,7 +37,7 @@ object HelloWorld extends JSApp {
 {% highlight haskell %}
 module Main where
 
-import OutWatch
+import OutWatch.Dom
 import OutWatch.Core (render) as OutWatch
 
 main =
