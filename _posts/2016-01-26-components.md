@@ -402,7 +402,6 @@ def personComponent(labelText: String, texts: Sink[String]) = {
 And with that, we conclude this chapter.
 
 We learned about how components help us structure our code into small reusable modules. We also learned about the different types of parameters passed into functions and how we can transform event streams declaratively.
-<a onclick="window.location='/managing-state'+window.location.search;">chapter</a>
 In the next <a onclick="window.location='/managing-state'+window.location.search;">chapter</a>, we're going to talk about how to manage state effectively.
 
 {% include switch-tab-sources.html %}
