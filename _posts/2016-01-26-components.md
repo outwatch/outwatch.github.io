@@ -232,7 +232,7 @@ buttonComponent labelText textValues =
 This isn't a very useful component, but it demonstrates two things.
 First, how easy it is to replace components, if they have the same signature and second,
 <span class="lang-specific scala" markdown="1"> that we can take any DOM event, and write a value after it in parentheses to transform each emission to the value in the brackets.</span>
-<span class="lang-specific scala" markdown="1"> that we can take any DOM event and preemptively map each of it's emissions using `mapE`. In our case we always just want to emit the `labelText` so `(const labelText)` turns each `MouseEvent` into the `labelText` and emits that into our `textValues` Sink.</span>
+<span class="lang-specific purescript" markdown="1"> that we can take any DOM event and preemptively map each of it's emissions using `mapE`. In our case we always just want to emit the `labelText` so `(const labelText)` turns each `MouseEvent` into the `labelText` and emits that into our `textValues` Sink.</span>
 
 This is roughly equivalent to calling the `mapTo` operator on the resulting `Observable` and allows us to declare emissions in a more concise way.
 In most of our use cases, we don't really care about the `MouseEvent`, that the `click` event emits.
