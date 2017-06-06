@@ -39,9 +39,38 @@ Retyping `fastOptJS` every time we want to compile can get quite annoying and in
 Luckily, in `sbt`, we can run every command in watch mode by simply adding a tilde `~` in front of it.
 {% highlight text %}
 $ sbt
-> ~fastOptJS
+> ~fastOptJS::webpack
 [success] (...)
 1. Waiting for source changes... (press enter to interrupt)
+{% endhighlight %}
+
+You also have the option automatically reload your page on code changes.
+To do that, first you'll need to install `webpack-dev-server`:
+{% highlight text %}
+$ npm install -g webpack-dev-server
+{% endhighlight %}
+
+Then, while in sbt, start up the server process:
+{% highlight text %}
+> fastOptJS::startWebpackDevServer
+{% endhighlight %}
+
+Then instruct sbt to recompile on source changes:
+{% highlight text %}
+> ~fastOptJS
+{% endhighlight %}
+
+And now your server should compile your code and serve it on port 8080.
+Next up, you'll want to tell webpack to make a page reload on every change.
+You can do this by adding the following to your build.sbt:
+{% highlight text %}
+webpackDevServerExtraArgs := Seq("--inline")
+{% endhighlight %}
+
+
+Now if you want to stop the background server process simply do this:
+{% highlight text %}
+> fastOptJS::stopWebpackDevServer
 {% endhighlight %}
 
 And voila, you've created your first working developer environment. You can skip the rest of this chapter if everything worked for you.
@@ -51,7 +80,7 @@ And voila, you've created your first working developer environment. You can skip
 Create a new SBT project and add the ScalaJS plugin to your `plugins.sbt`.
 Then add the following line to your `build.sbt`.
 {% highlight scala %}
-libraryDependencies += "io.github.outwatch" %%% "outwatch" % "0.9.2"
+libraryDependencies += "io.github.outwatch" %%% "outwatch" % "0.10.0"
 {% endhighlight %}
 Great, we've created our first OutWatch Project!
 
@@ -85,20 +114,16 @@ Inside we'll want to add a reference to our js files and also add a node in whic
 {% highlight html %}
 <body>
   <div id="app"></div>
-  <script type="text/javascript" src="./target/scala-2.12/<your-project-name>-fastopt.js"></script>
-  <script type="text/javascript" src="./target/scala-2.12/<your-project-name>-jsdeps.js"></script>
-  <script type="text/javascript">
-      HelloOutWatch().main();
-  </script>
+  <script type="text/javascript" src="./target/scala-2.12/scalajs-bundler/main/<your-project-name>-fastopt-bundle.js"></script>
 </body>
 {% endhighlight %}
 
 We're basically done here. We created our first app. Now we only need to run it.
 
-To run this, simply launch `sbt` and then use the `fastOptJS` command to compile your code to JavaScript.
+To run this, simply launch `sbt` and then use the `fastOptJS::webpack` command to compile your code to JavaScript.
 {% highlight text %}
 $ sbt
-> fastOptJS
+> fastOptJS::webpack
 {% endhighlight %}
 
 And with that, we're done, check your browser, to see what we just created (it's not that special, but it's something).
