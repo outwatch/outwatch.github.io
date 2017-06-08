@@ -329,7 +329,7 @@ With that in mind, we should now change our code to this:
 
 //...
 
-val state = adds.merge(deletes)
+val state = additions.merge(deletions)
   .scan(List.empty[String])((list, fn) => fn.apply(list))
 
 val listViews = state
@@ -608,7 +608,7 @@ Let's get right into it, by defining all the easy stuff:
 <div class="lang-specific scala">
 {% highlight scala %}
 sealed trait Action
-case class AddTodo(todo: String) extends Action
+case object AddTodo extends Action
 case class RemoveTodo(todo: String) extends Action
 case class UpdateText(value: String) extends Action
 
