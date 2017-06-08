@@ -123,7 +123,7 @@ val root = div(
   label("Hide view"),
 - input(tpe := "checkbox", change --> toggleEvents),
 - h2(hidden <-- toggleEvents.map(_.target.checked), "Visible!")
-+ input(tpe := "checkbox", inputChecked ==> toggleEvents)
++ input(tpe := "checkbox", inputChecked --> toggleEvents)
 + h2(hidden <-- toggleEvents, "Visible!")
 )
 

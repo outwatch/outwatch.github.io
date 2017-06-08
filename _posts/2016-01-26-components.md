@@ -368,7 +368,7 @@ def personComponent(labelText: String, texts: Sink[String]) = {
 +   input(inputString --> firstNames, value <-- clearEvents),
 +   input(inputString --> lastNames, value <-- clearEvents),
 +   button(
-+     click(fullNames) --> confirmedTexts,
++     click(fullNames) --> texts,
 +     click("") --> clearEvents,
 +     disabled <-- disableEvents,
 +     "Submit"
