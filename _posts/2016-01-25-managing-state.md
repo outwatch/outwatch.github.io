@@ -37,7 +37,7 @@ let additions = createHandler[]
 
     root = div
       [ button[mapE click (const 1) ==> additions, text "+"]
-      , button[mapE click (const -1) ==> additions, text "-"]
+      , button[mapE click (const -1) ==> subtractions, text "-"]
       , span [text "Count: "]
       ]
 
