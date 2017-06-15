@@ -119,8 +119,8 @@ Let's change our code to reflect the things we just talked about.
 +   .scan(0)((acc, cur) => acc + cur)
 
 val root = div(
-  button(click(1) --> plusClicks, "+"),
-  button(click(-1) --> handleMinus, "-"),
+  button(click(1) --> additions, "+"),
+  button(click(-1) --> subtractions, "-"),
 - span("Count: ")
 + span("Count: ", child <-- state)
 )
@@ -138,7 +138,7 @@ val root = div(
 
       root = div
         [ button[mapE click (const 1) ==> additions, text "+"]
-        , button[mapE click (const -1) ==> additions, text "-"]
+        , button[mapE click (const -1) ==> subtractions, text "-"]
 -       , span[text "Count: "]
 +       , span[text "Count: ", child <== state]
         ]
