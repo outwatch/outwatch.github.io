@@ -72,14 +72,14 @@ OutWatch.render("#app", root)
 </div>
 <div class="lang-specific purescript">
 {% highlight haskell %}
-let toggleEvents = createInputHandler[]
+let root = do
+  toggleEvents <- createInputHandler[]
 
-    root = div
-      [ label [text "Hide view"]
-      , input [tpe := "checkbox", change ==> toggleEvents]
-      , h2 [hidden <== (toggleEvents.src # map (\e -> unsafePerformEff $ checked $ unsafeCoerce $ target $ unsafeCoerce e)), text "Visible!"]
-      ]
-
+  div
+    [ label [text "Hide view"]
+    , input [tpe := "checkbox", change ==> toggleEvents]
+    , h2 [hidden <== (toggleEvents.src # map (\e -> unsafePerformEff $ checked $ unsafeCoerce $ target $ unsafeCoerce e)), text "Visible!"]
+    ]
 in OutWatch.render "#app" root
 {% endhighlight %}
 </div>
@@ -132,18 +132,18 @@ OutWatch.render("#app", root)
 </div>
 <div class="lang-specific purescript">
 {% highlight diff %}
-- let toggleEvents = createInputHandler[]
-+ let toggleEvents = createBoolHandler[]
+let root = do
+-   toggleEvents <- createInputHandler[]
++   toggleEvents <- createBoolHandler[]
 
-    root = div
+    div
       [ label [text "Hide view"]
 -     , input [tpe := "checkbox", change ==> toggleEvents]
 -     , h2 [hidden <== (toggleEvents.src # map (\e -> unsafePerformEff $ ...
 +     , input [tpe := "checkbox", inputChecked ==> toggleEvents]
 +     , h2 [hidden <== toggleEvents.src, text "Visible!"]
       ]
-
-  in OutWatch.render "#app" root
+in OutWatch.render "#app" root
 {% endhighlight %}
 </div>
 
@@ -183,7 +183,7 @@ val firstNames = firstNameEvents.startWith("")
 val lastNames = lastNameEvents.startWith("")
 
 val fullNames = firstNames
-  .combineLatestWith(lastNames)((first, last) => s"$first $last")
+      .combineLatestWith(lastNames)((first, last) => s"$first $last")
 
 val root = div(
   input(inputString --> firstNameEvents),
@@ -196,22 +196,22 @@ OutWatch.render("#app", root)
 </div>
 <div class="lang-specific purescript">
 {% highlight haskell %}
-let firstNameEvents = createStringHandler[]
-    lastNameEvents = createStringHandler[]
+let root = do
+  firstNameEvents <- createStringHandler[]
+  lastNameEvents <- createStringHandler[]
 
-    firstNames = firstNameEvents.src # startWith ""
-    lastNames = lastNameEvents.src # startWith ""
+  let firstNames = firstNameEvents.src # startWith ""
+  let lastNames = lastNameEvents.src # startWith ""
 
-    fullNames = combineLatest(\first last -> first <> " " <> last)
-      firstNames lastNames
+  let fullNames = combineLatest(\first last -> first <> " " <> last)
+        firstNames lastNames
 
 
-    root = div
-      [ input [inputString ==> firstNameEvents]
-      , input [inputString ==> lastNameEvents]
-      , h3 [text "Hello, ", childShow <== fullNames]
-      ]
-
+  div
+    [ input [inputString ==> firstNameEvents]
+    , input [inputString ==> lastNameEvents]
+    , h3 [text "Hello, ", childShow <== fullNames]
+    ]
 in OutWatch.render "#app" root
 {% endhighlight %}
 </div>
@@ -281,21 +281,22 @@ OutWatch.render("#app", root)
 </div>
 <div class="lang-specific purescript">
 {% highlight haskell %}
-let sliderEvents = createNumberHandler[]
+let root = do
+  sliderEvents = createNumberHandler[]
 
-    imageLists = sliderEvents.src
-      # map (_ / 10.0)
-      # map round
-      # map (\n -> replicate n (img[src := imageUrl]))
+  let imageLists = sliderEvents.src
+    # map (_ / 10.0)
+    # map round
+    # map (\n -> replicate n (img[src := imageUrl]))
 
-    root = ul
-      [ input
-        [ tpe := "range"
-        , inputNumber ==> sliderEvents
-        , valueShow := 0
-        ]
-      , div [children <== imageLists]
+  ul
+    [ input
+      [ tpe := "range"
+      , inputNumber ==> sliderEvents
+      , valueShow := 0
       ]
+    , div [children <== imageLists]
+    ]
 in OutWatch.render "#app" root
 {% endhighlight %}
 </div>
@@ -327,19 +328,19 @@ OutWatch.render("#app", root)
 </div>
 <div class="lang-specific purescript">
 {% highlight haskell %}
-let firstNames = createStringHandler[""]
-    lastNames = createStringHandler[""]
+let root = do
+  firstNames <- createStringHandler[""]
+  lastNames <- createStringHandler[""]
 
-    fullNames = combineLatest(\first last -> first <> " " <> last)
-      firstNames.src lastNames.src
+  let fullNames = combineLatest(\first last -> first <> " " <> last)
+        firstNames.src lastNames.src
 
-    root = div
-      [ input [inputString ==> firstNames]
-      , input [inputString ==> lastNames]
-      , h3 [text "Hello, ", childShow <== fullNames]
-      ]
-
-in render "#app" root
+  div
+    [ input [inputString ==> firstNames]
+    , input [inputString ==> lastNames]
+    , h3 [text "Hello, ", childShow <== fullNames]
+    ]
+in OutWatch.render "#app" root
 {% endhighlight %}
 </div>
 

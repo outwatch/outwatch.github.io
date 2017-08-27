@@ -31,15 +31,15 @@ OutWatch.render("#app", root)
 </div>
 <div class="lang-specific purescript">
 {% highlight haskell %}
+let root = do
+  additions <- createHandler[]
+  subtractions <- createHandler[]
 
-let additions = createHandler[]
-    subtractions = createHandler[]
-
-    root = div
-      [ button[mapE click (const 1) ==> additions, text "+"]
-      , button[mapE click (const -1) ==> additions, text "-"]
-      , span [text "Count: "]
-      ]
+  div
+    [ button[mapE click (const 1) ==> additions, text "+"]
+    , button[mapE click (const -1) ==> additions, text "-"]
+    , span [text "Count: "]
+    ]
 
 in OutWatch.render "#app" root
 {% endhighlight %}
@@ -72,7 +72,7 @@ So let's add a third stream as a result of our first two streams.
 {% highlight diff %}
   ...
 
-+     operations = merge subtractions additions
++ let operations = merge subtractions additions
 
   ...
 {% endhighlight %}
@@ -132,16 +132,16 @@ val root = div(
 {% highlight diff %}
   ...
 
--     operations = merge subtractions additions
-+     state = (merge subtractions additions)
+- let operations = merge subtractions additions
++ let state = (merge subtractions additions)
 +       # scan (+) 0
 
-      root = div
-        [ button[mapE click (const 1) ==> additions, text "+"]
-        , button[mapE click (const -1) ==> additions, text "-"]
--       , span[text "Count: "]
-+       , span[text "Count: ", child <== state]
-        ]
+  div
+    [ button[mapE click (const 1) ==> additions, text "+"]
+    , button[mapE click (const -1) ==> additions, text "-"]
+-     , span[text "Count: "]
++     , span[text "Count: ", child <== state]
+    ]
 
   ...
 {% endhighlight %}
@@ -192,14 +192,14 @@ def textFieldComponent(outputEvents: Sink[String]) = {
 <div class="lang-specific purescript">
 {% highlight haskell %}
 textFieldComponent :: forall e. SinkLike e String _ -> VDom e
-textFieldComponent outputEvents =
-  let textValues = createStringHandler[]
+textFieldComponent outputEvents = do
+  textValues <- createStringHandler[]
 
-      disabledValues = textValues.src
+  let disabledValues = textValues.src
         # map (\s -> length s < 4)
         # startWith true
 
-  in div
+  div
     [ label [text "Todo: "]
     , input [inputString ==> textValues]
     , button
@@ -264,16 +264,16 @@ val merged = additions.merge(deletions)
 </div>
 <div class="lang-specific purescript">
 {% highlight haskell %}
-let addEvents = createStringHandler[]
-    deleteEvents = createStringHandler[]
+  addEvents <- createStringHandler[]
+  deleteEvents <- createStringHandler[]
 
-    addToList todo list = snoc list todo
-    removeFromList todo list = list # filter (_ /= todo)
+  let addToList todo list = snoc list todo
+  let removeFromList todo list = list # filter (_ /= todo)
 
-    additions = addEvents.src # map addToList
-    deletions = deleteEvents.src # map removeFromList
+  let additions = addEvents.src # map addToList
+  let deletions = deleteEvents.src # map removeFromList
 
-    merged = merge additions deletions
+  let merged = merge additions deletions
 {% endhighlight %}
 </div>
 This might be a bit difficult to understand right know, so we're gonna go through it piece by piece.
@@ -304,8 +304,8 @@ Here's how that looks in its most verbose version for posterity:
 
     ...
 
--   merged = merge additions deletions
-+   state = (merge additions deletions)
+- let merged = merge additions deletions
++ let state = (merge additions deletions)
 +     # scan (\modify list -> modify list) []
 
 {% endhighlight %}
@@ -342,11 +342,11 @@ val listViews = state
 
     ...
 
-    state = (merge additions deletions)
-      # scan (\modify list -> modify list) []
+  let state = (merge additions deletions)
+        # scan (\modify list -> modify list) []
 
-    listViews = state
-      # map (map (\todo -> todoComponent todo deleteEvents))
+  let listViews = state
+        # map (map (\todo -> todoComponent todo deleteEvents))
 
 {% endhighlight %}
 </div>
@@ -370,12 +370,12 @@ OutWatch.render("#app", root)
 <div class="lang-specific purescript">
 {% highlight haskell %}
 
-    ...
+  ...
 
-    root = div
-      [ textFieldComponent addEvents
-      , ul[children <== listViews]
-      ]
+  div
+    [ textFieldComponent addEvents
+    , ul[children <== listViews]
+    ]
 in OutWatch.render "#app" root
 {% endhighlight %}
 </div>
@@ -489,11 +489,11 @@ val storeSource = storeSink
 </div>
 <div class="lang-specific purescript">
 {% highlight haskell %}
-let storeSink = createHandler[]
+  storeSink <- createHandler[]
 
-    storeSource = storeSink
-      # scan reducer initialState
-      # startWith initialState
+  let storeSource = storeSink
+        # scan reducer initialState
+        # startWith initialState
 {% endhighlight %}
 </div>
 We now have a `Sink` where we can dispatch our actions into and a `Source` that will emit a new state every time an action is dispatched.
@@ -503,9 +503,9 @@ Now we can rewrite our view very easily:
 <div class="lang-specific scala">
 {% highlight scala %}
 div(
- button(click(Add) --> storeSink, "+"),
- button(click(Subtract) --> storeSink, "-"),
- span("Count: ", child <-- storeSource)
+  button(click(Add) --> storeSink, "+"),
+  button(click(Subtract) --> storeSink, "-"),
+  span("Count: ", child <-- storeSource)
 )
 {% endhighlight %}
 </div>
@@ -540,13 +540,13 @@ createStore :: forall eff state action.
                state
             -> (action -> state -> state)
             -> Store eff state action
-createStore initialState reducer =
-  let handler = createHandler[]
-      src = handler.src
+createStore initialState reducer = do
+  handler <- createHandler[]
+  let src = handler.src
         # scan reducer initialState
         # startWith initialState
-      sink = handler.sink
-  in { src, sink }
+  let sink = handler.sink
+  { src, sink }
 {% endhighlight %}
 </div>
 

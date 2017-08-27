@@ -125,7 +125,7 @@ def nameListComponent(nameLists: Observable[List[VNode]]): VNode = {
 {% highlight haskell %}
 nameListComponent :: forall e. Observable(List(VDom e)) -> VDom e
 nameListComponent nameLists =
-  div[ span(children <== nameLists) ]
+  div[ span [children <== nameLists] ]
 {% endhighlight %}
 </div>
 
@@ -187,13 +187,13 @@ def main() = {
 <div class="lang-specific purescript">
 {% highlight haskell %}
 main =
-  let names = createStringHandler[]
+  let root = do
+    names <- createStringHandler[]
 
-      root = div
-        [ inputComponent[text "Name", names]
-        , h2[text "Hello ", childShow <== names]
-        ]
-
+    div
+      [ inputComponent[text "Name", names]
+      , h2[text "Hello ", childShow <== names]
+      ]
   in OutWatch.render "#app" root
 {% endhighlight %}
 </div>
@@ -271,14 +271,14 @@ def personComponent(labelText: String, texts: Sink[String]) = {
 <div class="lang-specific purescript">
 {% highlight haskell %}
 personComponent :: forall e. String -> SinkLike e String _ -> VDom e
-personComponent labelText textValues =
-  let firstNames = createHandler [""]
-      lastNames = createHandler [""]
+personComponent labelText textValues = do
+  firstNames <- createHandler [""]
+  lastNames <- createHandler [""]
 
-      fullNames = combineLatest (\first last -> first <> " " <> last)
+  let fullNames = combineLatest (\first last -> first <> " " <> last)
         firstNames.src lastNames.src
 
-  in div
+  div
     [ label [text labelText]
     , input [inputString ==> firstNames]
     , input [inputString ==> lastNames]
@@ -322,16 +322,16 @@ def personComponent(labelText: String, texts: Sink[String]) = {
 <div class="lang-specific purescript">
 {% highlight diff %}
 personComponent :: forall e. String -> SinkLike e String _ -> VDom e
-personComponent labelText textValues =
-  let firstNames = createStringHandler[""]
-      lastNames = createStringHandler[""]
+personComponent labelText textValues = do
+  firstNames <- createHandler [""]
+  lastNames <- createHandler [""]
 
-      fullNames = combineLatest (\first last -> first <> " " <> last)
+  let fullNames = combineLatest (\first last -> first <> " " <> last)
         firstNames.src lastNames.src
+  
++ let disableEvents = fullNames # map (\s -> length s < 4)
 
-+     disableEvents = fullNames # map (\s -> length s < 4)
-
-  in div
+  div
     [ label [text labelText]
     , input [inputString ==> firstNames]
     , input [inputString ==> lastNames]
@@ -382,9 +382,9 @@ def personComponent(labelText: String, texts: Sink[String]) = {
 
       ...
 
-+     clearEvents = createStringHandler[]
++ clearEvents <- createStringHandler[]
 
-  in div
+  div
     [ label [text labelText]
 -   , input [inputString ==> firstNames]
 -   , input [inputString ==> lastNames]
