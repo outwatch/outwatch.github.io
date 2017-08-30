@@ -21,7 +21,7 @@ To compile your Scala code to JavaScript simply run:
 
 {% highlight text %}
 $ cd <your-project-name>
-$ sbt fastOptJS
+$ sbt fastOptJS::webpack
 {% endhighlight %}
 
 Then open the `index.html` file in your browser to see what you just created.
