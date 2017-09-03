@@ -24,7 +24,7 @@ Now we're ready to create our main entry point:
 {% highlight haskell %}
 module Main where
 
-import OutWatch
+import OutWatch.Dom
 
 main = ...
 
