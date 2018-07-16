@@ -15,20 +15,22 @@ $ bower install purescript-outwatch
 <div class="example-hello-world-code">
 <div class="lang-specific scala">
 {% highlight scala %}
-import scala.scalajs.js.JSApp
 import outwatch.dom._
+import outwatch.dom.dsl._
+import monix.execution.Scheduler.Implicits.global
 
-object HelloWorld extends JSApp {
-  def main() = {
-    val names = createStringHandler()
+object Hello {
+  def main(args: Array[String]): Unit = {
+
+    val name = Handler.create[String]().unsafeRunSync()
 
     val node = div(
-      input(placeholder := "Name", inputString --> names),
+      input(placeholder := "Name", onInput.value --> name),
       hr(),
-      h2("Hello ", child <-- names)
+      h2("Hello ", child <-- name)
     )
 
-    OutWatch.render("#app", node)
+    OutWatch.renderInto("#app", node).unsafeRunSync()
   }
 }
 {% endhighlight %}
