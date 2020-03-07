@@ -7,3 +7,4 @@ _site/
 .editorconfig
 
 .jekyll-metadata
+Gemfile.lock

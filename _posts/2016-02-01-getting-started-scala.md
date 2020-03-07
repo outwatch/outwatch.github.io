@@ -3,6 +3,8 @@ title:  "Get started with Scala"
 tags: intro
 ---
 
+**This information is slightly outdated, please refer to the github repository instead:* https://github.com/outwatch/outwatch
+
 
 First things first, in order to use OutWatch you will need to have Java and sbt installed.
 Check out [this guide](https://java.com/en/download/help/download_options.xml) for Java and [this guide](http://www.scala-sbt.org/release/docs/Setup.html) for sbt if you're unsure how to proceed.
