@@ -73,16 +73,19 @@ enablePlugins(<span class="hljs-type">ScalaJSBundlerPlugin</span>)
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> outwatch._
 <span class="hljs-keyword">import</span> outwatch.dsl._
 <span class="hljs-keyword">import</span> colibri._
+<span class="hljs-keyword">import</span> cats.effect.<span class="hljs-type">IO</span>
 
-docsLivePreview(node) {
+<span class="hljs-keyword">val</span> component = {
   <span class="hljs-keyword">val</span> counter = <span class="hljs-type">Subject</span>.behavior(<span class="hljs-number">0</span>)
   div(
     button(<span class="hljs-string">"+"</span>, onClick(counter.map(_ + <span class="hljs-number">1</span>)) --&gt; counter),
     counter,
   )
 }
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
-<div id="mdoc-html-run3" data-mdoc-js></div>
+<div id="mdoc-html-run2" data-mdoc-js></div>
 <p>To understand how this example works in-depth, please read about <a href="#dynamic-content">Dynamic Content</a> and <a href="#handling-events">Handling Events</a>.</p>
 <p><strong>Important:</strong> In your application, <code>OutWatch.renderReplace</code> should be called only once at the end of the main method. To create dynamic content, you will design your data-flow with <code>Obvervable</code>, <code>Subject</code> and/or <code>Scala.Rx</code> and then instantiate outwatch only once with this method call. Before that, no reactive subscriptions will happen.</p>
 <h2><a class="anchor" aria-hidden="true" id="static-content"></a><a href="#static-content" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Static Content</h2>
@@ -90,6 +93,7 @@ docsLivePreview(node) {
 <h3><a class="anchor" aria-hidden="true" id="imports"></a><a href="#imports" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Imports</h3>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> outwatch._
 <span class="hljs-keyword">import</span> outwatch.dsl._
+<span class="hljs-keyword">import</span> cats.effect.<span class="hljs-type">IO</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="concatenating-strings"></a><a href="#concatenating-strings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Concatenating Strings</h3>
 <pre><code class="hljs css language-scala">div(<span class="hljs-string">"Hello "</span>, <span class="hljs-string">"World"</span>)
@@ -185,7 +189,7 @@ If you want to use something not available in Scala Dom Types, you can use custo
 <p>Source Code: <a href="https://github.com/OutWatch/outwatch/blob/master/outwatch/src/main/scala/outwatch/definitions/OutwatchAttributes.scala#L75">OutwatchAttributes.scala</a>, <a href="https://github.com/OutWatch/outwatch/blob/master/outwatch/src/main/scala/outwatch/helpers/Builder.scala#L35">Builder.scala</a></p>
 <h3><a class="anchor" aria-hidden="true" id="svg"></a><a href="#svg" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SVG</h3>
 <p>SVG tags and attributes are available via an extra import. Namespacing is automatically handled for you.</p>
-<pre><code class="hljs css language-scala">docsLivePreview(node) {
+<pre><code class="hljs css language-scala">val component = {
   import svg._
   svg(
     height := "100px",
@@ -201,8 +205,10 @@ If you want to use something not available in Scala Dom Types, you can use custo
     )
   )
 }
+
+OutWatch.renderInto[IO](preview, component).unsafeRunSync()
 </code></pre>
-<div id="mdoc-html-run37" data-mdoc-js></div>
+<div id="mdoc-html-run36" data-mdoc-js></div>
 <h3><a class="anchor" aria-hidden="true" id="vnode-and-vdommodifier"></a><a href="#vnode-and-vdommodifier" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>VNode and VDomModifier</h3>
 <p>The important types we are using in the examples above are <code>VNode</code> and <code>VDomModifier</code>. <code>VNode</code> represents a node in the virtual dom, while and <code>VDomModifier</code> represents atrributes and styles and children of a node.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> vnode: <span class="hljs-type">VNode</span> = div()
@@ -330,7 +336,7 @@ div(person)
 <span class="hljs-keyword">import</span> monix.execution.<span class="hljs-type">Scheduler</span>.<span class="hljs-type">Implicits</span>.global
 <span class="hljs-keyword">import</span> colibri.ext.monix._
 
-docsLivePreview(node) {
+<span class="hljs-keyword">val</span> component = {
   div(
     div(
       <span class="hljs-string">"Observable (colibri): "</span>,
@@ -342,15 +348,17 @@ docsLivePreview(node) {
     ),
   )
 }
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
-<div id="mdoc-html-run54" data-mdoc-js></div>
+<div id="mdoc-html-run53" data-mdoc-js></div>
 <p><strong>Important:</strong> In your application, <code>OutWatch.renderReplace</code> should be called only once at the end of the main method. To create dynamic content, you will design your data-flow with <code>Obvervable</code>, <code>Subject</code> and/or <code>Scala.Rx</code> and then instantiate outwatch only once with this method call. Before that, no reactive subscriptions will happen.</p>
 <h3><a class="anchor" aria-hidden="true" id="reactive-attributes"></a><a href="#reactive-attributes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reactive attributes</h3>
 <p>Attributes can also take dynamic values.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Observable</span>
 <span class="hljs-keyword">import</span> concurrent.duration._
 
-docsLivePreview(node) {
+<span class="hljs-keyword">val</span> component = {
   <span class="hljs-keyword">val</span> boxWidth = <span class="hljs-type">Observable</span>.interval(<span class="hljs-number">1.</span>second).map(i =&gt; <span class="hljs-keyword">if</span>(i % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) <span class="hljs-string">"100px"</span> <span class="hljs-keyword">else</span> <span class="hljs-string">"50px"</span>)
   div(
     width &lt;-- boxWidth,
@@ -359,14 +367,16 @@ docsLivePreview(node) {
     transition := <span class="hljs-string">"width 0.5s"</span>,
   )
 }
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
-<div id="mdoc-html-run55" data-mdoc-js></div>
+<div id="mdoc-html-run54" data-mdoc-js></div>
 <h3><a class="anchor" aria-hidden="true" id="reactive-modifiers-and-vnodes"></a><a href="#reactive-modifiers-and-vnodes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reactive Modifiers and VNodes</h3>
 <p>You can stream any <code>VDomModifier</code> and therefore whole components, attributes, styles, sets of modifiers, and so on:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Observable</span>
 <span class="hljs-keyword">import</span> concurrent.duration._
 
-docsLivePreview(node) {
+<span class="hljs-keyword">val</span> component = {
   div(
     div(
       width := <span class="hljs-string">"50px"</span>,
@@ -380,9 +390,10 @@ docsLivePreview(node) {
   )
 }
 
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
-<div id="mdoc-html-run56" data-mdoc-js></div>
-<pre><code class="hljs css language-scala">docsLivePreview(node) {
+<div id="mdoc-html-run55" data-mdoc-js></div>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> component = {
   <span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Observable</span>
   <span class="hljs-keyword">import</span> concurrent.duration._
 
@@ -390,8 +401,9 @@ docsLivePreview(node) {
   div(<span class="hljs-string">"Hello "</span>, nodeStream)
 }
 
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
-<div id="mdoc-html-run57" data-mdoc-js></div>
+<div id="mdoc-html-run56" data-mdoc-js></div>
 <h3><a class="anchor" aria-hidden="true" id="handling-events"></a><a href="#handling-events" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Handling Events</h3>
 <p>Outwatch allows to react to dom events in a very flexible way. Every event handler emits events to be reactively processed.
 We are working with dom elements and want to react to events of these dom elements. For this, there is <a href="https://github.com/OutWatch/outwatch/blob/master/outwatch/src/main/scala/outwatch/EmitterBuilder.scala">EmitterBuilder</a>. For example, take the <code>click</code> event for which <code>onClick</code> is an <code>EmitterBuilder</code>:</p>
