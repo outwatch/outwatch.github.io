@@ -96,7 +96,7 @@ enablePlugins(<span class="hljs-type">ScalaJSBundlerPlugin</span>)
 <span class="hljs-keyword">import</span> cats.effect.<span class="hljs-type">IO</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="concatenating-strings"></a><a href="#concatenating-strings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Concatenating Strings</h3>
-<pre><code class="hljs css language-scala">div(<span class="hljs-string">"Hello "</span>, <span class="hljs-string">"World"</span>)
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> component = div(<span class="hljs-string">"Hello "</span>, <span class="hljs-string">"World"</span>)
 <span class="hljs-comment">// &lt;div&gt;Hello World&lt;/div&gt;</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="nesting"></a><a href="#nesting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nesting</h3>
@@ -140,10 +140,16 @@ enablePlugins(<span class="hljs-type">ScalaJSBundlerPlugin</span>)
 
 label(`<span class="hljs-keyword">for</span>` := <span class="hljs-string">"inputid"</span>)
 <span class="hljs-comment">// &lt;label for="inputid" /&gt;</span>
+
+input(`<span class="hljs-class"><span class="hljs-keyword">type</span>` </span>:= <span class="hljs-string">"text"</span>)
+<span class="hljs-comment">// &lt;input type="text" /&gt;</span>
 </code></pre>
-<p>There is also a shortcut for the class atrribute:</p>
+<p>There are shortcuts for the class and type atrributes:</p>
 <pre><code class="hljs css language-scala">div(cls := <span class="hljs-string">"myclass"</span>)
 <span class="hljs-comment">// &lt;div class="myclass"&gt;&lt;/div&gt;</span>
+
+input(tpe := <span class="hljs-string">"text"</span>)
+<span class="hljs-comment">// &lt;input type="text" /&gt;</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="overriding-attributes"></a><a href="#overriding-attributes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overriding attributes</h3>
 <p>Attributes and styles with the same name will be overwritten. Last wins.</p>
@@ -251,12 +257,12 @@ div(
 <span class="hljs-comment">// &lt;/div&gt;</span>
 </code></pre>
 <p>Since modifiers are <em>appended</em>, they can overwrite existing ones. This is useful to adjust existing components to your needs.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> box = div(width := <span class="hljs-string">"100px"</span>, height := <span class="hljs-string">"100px"</span>)
+<pre><code class="hljs css language-scala js:mdoc:compile-only"><span class="hljs-keyword">val</span> box = div(width := <span class="hljs-string">"100px"</span>, height := <span class="hljs-string">"100px"</span>)
 box(backgroundColor := <span class="hljs-string">"mediumseagreen"</span>, width := <span class="hljs-string">"200px"</span>)
 <span class="hljs-comment">// &lt;div style="width: 200px; height: 100px; background-color: mediumseagreen;"&gt;&lt;/div&gt;</span>
 </code></pre>
 <p>You can also <em>prepend</em> modifiers. This can be useful to provide defaults retroactively.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">withBorderIfNotProvided</span></span>(vnode: <span class="hljs-type">VNode</span>) = vnode.prepend(border := <span class="hljs-string">"3px solid coral"</span>)
+<pre><code class="hljs css language-scala js:mdoc:compile-only"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">withBorderIfNotProvided</span></span>(vnode: <span class="hljs-type">VNode</span>) = vnode.prepend(border := <span class="hljs-string">"3px solid coral"</span>)
 div(
   withBorderIfNotProvided(div(<span class="hljs-string">"hello"</span>, border := <span class="hljs-string">"7px solid moccasin"</span>)),
   withBorderIfNotProvided(div(<span class="hljs-string">"hello"</span>)),
@@ -267,9 +273,9 @@ div(
 <span class="hljs-comment">// &lt;/div&gt;</span>
 </code></pre>
 <p>Source Code: <a href="https://github.com/OutWatch/outwatch/blob/master/outwatch/src/main/scala/outwatch/VDomModifier.scala#L92">VDomModifier.scala</a></p>
-<h3><a class="anchor" aria-hidden="true" id="use-case-flexbox"></a><a href="#use-case-flexbox" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use-Case: Flexbox</h3>
+<h3><a class="anchor" aria-hidden="true" id="example-flexbox"></a><a href="#example-flexbox" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example: Flexbox</h3>
 <p>When working with <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">Flexbox</a>, you can set styles for the <strong>container</strong> and <strong>children</strong>. With <code>VNode.apply()</code> you can have all flexbox-related styles in one place. The child-components don't have to know anything about flexbox, even though they get specific styles assigned.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> itemA = div(<span class="hljs-string">"A"</span>, backgroundColor := <span class="hljs-string">"mediumseagreen"</span>)
+<pre><code class="hljs css language-scala js:mdoc:compile-only"><span class="hljs-keyword">val</span> itemA = div(<span class="hljs-string">"A"</span>, backgroundColor := <span class="hljs-string">"mediumseagreen"</span>)
 <span class="hljs-keyword">val</span> itemB = div(<span class="hljs-string">"B"</span>, backgroundColor := <span class="hljs-string">"tomato"</span>)
 
 div(
@@ -321,15 +327,17 @@ div(
 }
 </code></pre>
 <p>Now you can just use instances of <code>Person</code> in your dom definitions:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> person = <span class="hljs-type">Person</span>(<span class="hljs-string">"Hans"</span>, age = <span class="hljs-number">48</span>)
+<pre><code class="hljs css language-scala js:mdoc:compile-only"><span class="hljs-keyword">val</span> person = <span class="hljs-type">Person</span>(<span class="hljs-string">"Hans"</span>, age = <span class="hljs-number">48</span>)
 
 div(person)
 </code></pre>
 <p>Source Code: <a href="https://github.com/OutWatch/outwatch/blob/master/outwatch/src/main/scala/outwatch/Render.scala">Render.scala</a></p>
 <h2><a class="anchor" aria-hidden="true" id="dynamic-content"></a><a href="#dynamic-content" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dynamic Content</h2>
 <h3><a class="anchor" aria-hidden="true" id="reactive-programming"></a><a href="#reactive-programming" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reactive Programming</h3>
-<p>Outwatch natively renders reactive data types, like <code>Observable</code> or <code>Rx</code> (Scala.Rx). Outwatch internally uses the <a href="https://github.com/cornerman/colibri"><code>colibri</code></a> library and therefore provides lightweight observables and subjects out of the box.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> cats.effect.<span class="hljs-type">IO</span>
+<p>Outwatch natively renders reactive data types, like <code>Observable</code> or <code>Rx</code> (Scala.Rx). Outwatch internally uses the <a href="https://github.com/cornerman/colibri"><code>colibri</code></a> library and therefore provides lightweight observables and subjects out of the box. <code>BehaviorSubject</code> (which is also an <code>Observable</code>) is especially useful to deal with state. All subscriptions are automatically handled by outwatch.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> outwatch._
+<span class="hljs-keyword">import</span> outwatch.dsl._
+<span class="hljs-keyword">import</span> cats.effect.<span class="hljs-type">IO</span>
 </code></pre>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> concurrent.duration._
 
@@ -393,10 +401,10 @@ div(person)
 <span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
 <div id="mdoc-html-run55" data-mdoc-js></div>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> component = {
-  <span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Observable</span>
-  <span class="hljs-keyword">import</span> concurrent.duration._
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Observable</span>
+<span class="hljs-keyword">import</span> concurrent.duration._
 
+<span class="hljs-keyword">val</span> component = {
   <span class="hljs-keyword">val</span> nodeStream: <span class="hljs-type">Observable</span>[<span class="hljs-type">VNode</span>] = <span class="hljs-type">Observable</span>(div(<span class="hljs-string">"I am delayed!"</span>)).delay(<span class="hljs-number">5.</span>seconds)
   div(<span class="hljs-string">"Hello "</span>, nodeStream)
 }
@@ -404,133 +412,247 @@ div(person)
 <span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
 <div id="mdoc-html-run56" data-mdoc-js></div>
-<h3><a class="anchor" aria-hidden="true" id="handling-events"></a><a href="#handling-events" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Handling Events</h3>
-<p>Outwatch allows to react to dom events in a very flexible way. Every event handler emits events to be reactively processed.
-We are working with dom elements and want to react to events of these dom elements. For this, there is <a href="https://github.com/OutWatch/outwatch/blob/master/outwatch/src/main/scala/outwatch/EmitterBuilder.scala">EmitterBuilder</a>. For example, take the <code>click</code> event for which <code>onClick</code> is an <code>EmitterBuilder</code>:</p>
-<pre><code class="hljs css language-scala">button(onClick.foreach { println(<span class="hljs-string">"Element was clicked!"</span>) })
-</code></pre>
-<p>You can further <code>combine</code>, <code>map</code>, <code>collect</code>, <code>filter</code> and <code>transform</code> <code>EmitterBuilder</code>:</p>
-<pre><code class="hljs css language-scala">button(<span class="hljs-type">EmitterBuilder</span>.combine(onMouseUp.use(<span class="hljs-literal">false</span>), onMouseDown.use(<span class="hljs-literal">true</span>)).foreach { isDown =&gt; println(<span class="hljs-string">"Button is down? "</span> + isDown })
-<span class="hljs-comment">// this is the same as: button(EmitterBuilder.combine(onMouseUp.map(_ =&gt; false), onMouseDown.map(_ =&gt; true)).foreach { isDown =&gt; println("Button is down? " + isDown })</span>
-</code></pre>
-<p>Furthermore, you can create EmitterBuilders from streams with <code>emitter(stream)</code> (<code>EmitterBuilder.ofSource</code>) or create custom EmitterBuilders with <code>EmitterBuilder.ofModifier</code>, <code>EmitterBuilder.ofNode</code> or <code>EmitterBuilder.apply</code>.</p>
-<h4><a class="anchor" aria-hidden="true" id="global-events"></a><a href="#global-events" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global events</h4>
-<p>There are helpers for getting a stream of global <code>document</code> or <code>window</code> events, where you get a <code>colibri.Observable</code> for these events. For example:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> outwatch.dsl._
+<h3><a class="anchor" aria-hidden="true" id="rendering-futures"></a><a href="#rendering-futures" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rendering Futures</h3>
+<p>Futures are natively supported too:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> scala.concurrent.<span class="hljs-type">Future</span>
+<span class="hljs-keyword">implicit</span> <span class="hljs-keyword">val</span> ec = scala.concurrent.<span class="hljs-type">ExecutionContext</span>.global
 
-events.document.onClick.foreach { event =&gt; console.log(<span class="hljs-string">"Click Event"</span>, event) }
-
-events.window.onStorage.foreach { event =&gt; console.log(<span class="hljs-string">"Storage Event"</span>, event) }
-
-div(emitter(events.document.onClick) --&gt; sink)
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="managing-dynamic-state"></a><a href="#managing-dynamic-state" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Managing dynamic state</h3>
-<p>We have seen how to render dynamic content. But how to manage dynamic state? You want to have a reactive variable to hold a variable for you, so you can write into it and stream values from it.</p>
-<h4><a class="anchor" aria-hidden="true" id="example-counter"></a><a href="#example-counter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example: Counter</h4>
-<p>Let's implement a counter in a button. OutWatch provides <code>Handler</code>, which is a factory to create a reactive variable (more details later):</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> outwatch.reactive.handler._
-
-<span class="hljs-comment">// Handler.create returns `SyncIO`</span>
-<span class="hljs-keyword">val</span> counter: <span class="hljs-type">SyncIO</span>[<span class="hljs-type">VNode</span>] = <span class="hljs-type">Handler</span>.create[<span class="hljs-type">Int</span>](<span class="hljs-number">0</span>).map { handler =&gt;
-    button(onClick(handler.map(_ + <span class="hljs-number">1</span>)) --&gt; handler, <span class="hljs-string">"Counter: "</span>, handler)
+<span class="hljs-keyword">val</span> component = {
+  div(
+    <span class="hljs-type">Future</span> { <span class="hljs-number">1</span> + <span class="hljs-number">1</span> },
+  )
 }
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
-<p>Alternative version of a <code>counter</code>:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> counter = button(
-    onClick.useScan0(<span class="hljs-number">0</span>)(_ + <span class="hljs-number">1</span>).handled { source =&gt;
-        <span class="hljs-type">VDomModifier</span>(<span class="hljs-string">"Counter: "</span>, source)
-    }
+<div id="mdoc-html-run57" data-mdoc-js></div>
+<h3><a class="anchor" aria-hidden="true" id="higher-order-reactiveness"></a><a href="#higher-order-reactiveness" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Higher Order Reactiveness</h3>
+<p>Don't fear to nest different reactive constructs. Outwatch will handle everything for you. Example use-cases include sequences of api-requests, live database queries, etc.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> scala.concurrent.<span class="hljs-type">Future</span>
+<span class="hljs-keyword">implicit</span> <span class="hljs-keyword">val</span> ec = scala.concurrent.<span class="hljs-type">ExecutionContext</span>.global
+<span class="hljs-keyword">import</span> concurrent.duration._
+<span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Observable</span>
+
+<span class="hljs-keyword">val</span> component = {
+  div(
+    div(<span class="hljs-type">Observable</span>.interval(<span class="hljs-number">1.</span>seconds).map(i =&gt; <span class="hljs-type">Future</span> { i*i })),
+    div(<span class="hljs-type">Observable</span>.interval(<span class="hljs-number">1.</span>seconds).map(i =&gt; <span class="hljs-type">IO</span> { i*<span class="hljs-number">2</span> })),
+    div(<span class="hljs-type">IO</span> { <span class="hljs-type">Observable</span>.interval(<span class="hljs-number">1.</span>seconds) }),
+  )
+}
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
+</code></pre>
+<div id="mdoc-html-run58" data-mdoc-js></div>
+<h3><a class="anchor" aria-hidden="true" id="using-other-streaming-libraries"></a><a href="#using-other-streaming-libraries" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using other streaming libraries</h3>
+<p>We use the library <a href="https://github.com/cornerman/colibri"><code>colibri</code></a> for a minimal reactive library and for typeclasses around streaming. These typeclasses like <code>Source</code> and <code>Sink</code> allow to integrate third-party libraries for streaming easily.</p>
+<p>For using outwatch with monix:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.ext.monix._
+</code></pre>
+<p>For using outwatch with scala.rx:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.ext.rx._
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="dom-lifecycle-mangement"></a><a href="#dom-lifecycle-mangement" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dom Lifecycle Mangement</h3>
+<p>OutWatch automatically handles subscriptions of streams and observables in your components. You desribe your component with static and dynamic content (subjects, event emitters, <code>--&gt;</code> and <code>&lt;--</code>). When using these components, the needed subscriptions will be tied to the lifecycle of the respective dom elements and are managed for you. So whenever an element is mounted the subscriptions are run and whenever it is unmounted the subscriptions are killed.</p>
+<p>If you ever need to manually subscribe to a stream, you can let OutWatch manage the subscription for you:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> cats.effect.<span class="hljs-type">SyncIO</span>
+
+div(
+  managed(<span class="hljs-type">SyncIO</span> { myObservable.subscribe(???) }) <span class="hljs-comment">// this subscription is now bound to the lifetime of the outer div element</span>
 )
 </code></pre>
-<h4><a class="anchor" aria-hidden="true" id="example-input-field"></a><a href="#example-input-field" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example: Input Field</h4>
-<p>A more involved example is an input field where you want to capture the current value:</p>
-<pre><code class="hljs css language-scala">  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render</span></span>: <span class="hljs-type">SyncIO</span>[<span class="hljs-type">VNode</span>] = <span class="hljs-keyword">for</span> {
-    handler &lt;- <span class="hljs-type">Handler</span>.create[<span class="hljs-type">String</span>](<span class="hljs-string">"Initial"</span>)
-  } <span class="hljs-keyword">yield</span> {
-    div(
-      label( <span class="hljs-string">"Example!"</span> ),
-      input(
-        value &lt;-- handler, <span class="hljs-comment">// by writing into the `handler`, you could change the input value</span>
-        onChange.value --&gt; handler
+<h2><a class="anchor" aria-hidden="true" id="handling-events"></a><a href="#handling-events" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Handling Events</h2>
+<p>Outwatch allows to react to dom events in a very flexible way. Every event handler emits events to be further processed. Events can trigger side-effects, be filtered, mapped, replaced or forwarded to reactive variables. In outwatch this concept is called <a href="https://github.com/OutWatch/outwatch/blob/master/outwatch/src/main/scala/outwatch/EmitterBuilder.scala">EmitterBuilder</a>. For example, take the <code>click</code> event for which <code>onClick</code> is an <code>EmitterBuilder</code>:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> org.scalajs.dom.console
+
+<span class="hljs-keyword">val</span> component = {
+  div(
+    button(
+      <span class="hljs-string">"Log a Click-Event"</span>,
+      onClick.foreach { e =&gt; console.log(<span class="hljs-string">"Event: "</span>, e) },
+    ),
+    <span class="hljs-string">" (Check the browser console to see the event)"</span>
+  )
+}
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
+</code></pre>
+<div id="mdoc-html-run63" data-mdoc-js></div>
+<p>In the next example, we map the event <code>e</code> to extract <code>e.clientX</code> and write the result into the reactive variable (<code>BehaviorSubject</code>) called <code>x</code>:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Subject</span>
+<span class="hljs-keyword">val</span> component = {
+  <span class="hljs-keyword">val</span> x = <span class="hljs-type">Subject</span>.behavior(<span class="hljs-number">0.0</span>)
+  div(
+      div(
+        <span class="hljs-string">"Hover to see mouse x-coordinate"</span>,
+        onMouseMove.map(e =&gt; e.clientX) --&gt; x,
+        backgroundColor := <span class="hljs-string">"lightpink"</span>,
+        cursor.crosshair,
       ),
-      div(<span class="hljs-string">"Current Value:"</span>, handler)
-    )
-  }
-</code></pre>
-<h4><a class="anchor" aria-hidden="true" id="handler-factories"></a><a href="#handler-factories" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Handler factories</h4>
-<p>Methods like <code>Handler.create</code> are available for different streaming libarries (e.g. our own <code>colibri</code> and <code>monix</code>):</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> outwatch.reactive.handler._ <span class="hljs-comment">// or outwatch.reactive.handlers.monix._</span>
-
-<span class="hljs-keyword">val</span> handler: <span class="hljs-type">SyncIO</span>[<span class="hljs-type">Handler</span>[<span class="hljs-type">Int</span>]] = <span class="hljs-type">Handler</span>.create[<span class="hljs-type">Int</span>](<span class="hljs-number">1</span>)
-<span class="hljs-keyword">val</span> source: <span class="hljs-type">HandlerSource</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">HandlerSource</span>[<span class="hljs-type">Int</span>](<span class="hljs-number">3</span>)
-<span class="hljs-keyword">val</span> sink: <span class="hljs-type">HandlerSink</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">HandlerSink</span>.create(onNext, onError)
-</code></pre>
-<p>You typically just want one of these Environments in scope, the types would name-clash overwise. And the handler environment is totally optional, you can create your Handlers of the library of your choice yourself and everything will work out of the box without the environment. The environment is just to have a vocabulary of how to create sources, sinks, handlers without using concrete types names from third-party libraries. This way you can switch a whole file to another streaming library by merely changing an import from <code>outwatch.reactive.handler._</code> to <code>outwatch.reactive.handlers.monix._</code>. Of course, this will never cover all complex details that might be needed, but is target for basic use-cases and should be enough for most things. You have the streaming typeclasses as well to abstract further over your types.</p>
-<h4><a class="anchor" aria-hidden="true" id="referential-transparency"></a><a href="#referential-transparency" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Referential transparency</h4>
-<p>The factory <code>Handler.create</code> returns a <code>SyncIO</code> to be referential transparent. Take the counter example:</p>
-<pre><code class="hljs css language-scala">
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getCounterComponent</span></span>: <span class="hljs-type">SyncIO</span>[<span class="hljs-type">VNode</span>] = <span class="hljs-type">Handler</span>.create(<span class="hljs-number">0</span>).map { handler =&gt; <span class="hljs-comment">// alternative: Handler.createF[IO]</span>
-    button(onClick(handler.map(_ + <span class="hljs-number">1</span>)) --&gt; handler, handler)
+      div(<span class="hljs-string">" x = "</span>, x )
+   )
 }
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getUnsafeCounterComponent</span></span>: <span class="hljs-type">VNode</span> = {
-    <span class="hljs-keyword">val</span> handler = <span class="hljs-type">Handler</span>.unsafe(<span class="hljs-number">0</span>)
-    button(onClick(handler.map(_ + <span class="hljs-number">1</span>)) --&gt; handler, handler)
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
+</code></pre>
+<div id="mdoc-html-run64" data-mdoc-js></div>
+<p><code>EmitterBuilder</code> comes with many useful methods to make your life easier. Check the completions of your editor.</p>
+<h3><a class="anchor" aria-hidden="true" id="example-counter"></a><a href="#example-counter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example: Counter</h3>
+<p>We don't have to use the dom-event at all. Often it's useful to replace it with a constant or the current value of a reactive variable. Let's revisit the counter example:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Subject</span>
+<span class="hljs-keyword">val</span> component = {
+  <span class="hljs-keyword">val</span> counter = <span class="hljs-type">Subject</span>.behavior(<span class="hljs-number">0</span>)
+  div(
+      button(<span class="hljs-string">"increase"</span>, onClick(counter.map(_ + <span class="hljs-number">1</span>)) --&gt; counter),
+      button(<span class="hljs-string">"decrease"</span>, onClick(counter.map(_ - <span class="hljs-number">1</span>)) --&gt; counter),
+      button(<span class="hljs-string">"reset"</span>, onClick.use(<span class="hljs-number">0</span>) --&gt; counter),
+      div(<span class="hljs-string">"counter: "</span>, counter )
+   )
 }
 
-<span class="hljs-comment">// We can test whether the above functions are referential transparent</span>
-
-<span class="hljs-comment">// The first one is referential transparent, because component1 and component2 are equivalent</span>
-<span class="hljs-keyword">val</span> counter = getCounterComponent
-<span class="hljs-keyword">val</span> component1 = div(counter, counter) <span class="hljs-comment">// two counter buttons with separate state</span>
-<span class="hljs-keyword">val</span> component2 = div(getCounterComponent, getCounterComponent) <span class="hljs-comment">// two counter buttons with separate state</span>
-
-<span class="hljs-comment">// The second one is not, because component1 and component2 behave differently</span>
-<span class="hljs-keyword">val</span> counter = getUnsafeCounterComponent
-<span class="hljs-keyword">val</span> component1 = div(counter, counter) <span class="hljs-comment">// two counter buttons which share the same state</span>
-<span class="hljs-keyword">val</span> component2 = div(getUnsafeCounterComponent, getUnsafeCounterComponent) <span class="hljs-comment">// two counter buttons with separate state</span>
-
-<span class="hljs-comment">// For the first one, you can share the state explicitly</span>
-<span class="hljs-keyword">val</span> component = counter.map { counter =&gt; div(counter, counter) }
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
-<p>Why should we care? Because referential transparent functions can easily be refactored without affecting the meaning of the program and it is easier to reason about them.
-If you do not care about this, you could use <code>Handler.unsafe</code> or create the <code>Handler</code> yourself with the streaming library of your choice.</p>
-<h3><a class="anchor" aria-hidden="true" id="lifecycle-mangement"></a><a href="#lifecycle-mangement" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lifecycle Mangement</h3>
-<p>OutWatch automatically handles subscriptions of streams and observables in your components. You desribe your component with static and dynamic content (handlers, event emitters, <code>--&gt;</code> and <code>&lt;--</code>). When using these components, the needed subscriptions will be tight to the lifecycle of the respective dom elements and are managed for you. So whenever an element is mounted the subscriptions are run and whenever it is unmounted the subscriptions are killed.</p>
-<p>If you ever need to manually subscribe to a stream, you can let OutWatch manage them for you:</p>
-<pre><code class="hljs css language-scala">div(
-  managed(<span class="hljs-type">SyncIO</span> { observable.subscribe(...) }) <span class="hljs-comment">// this subscription is now bound to the lifetime of the outer div element</span>
-)
+<div id="mdoc-html-run65" data-mdoc-js></div>
+<h3><a class="anchor" aria-hidden="true" id="example-input-field"></a><a href="#example-input-field" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example: Input field</h3>
+<p>Another common use-case is the handling of values of input fields. Here the <code>BehaviorSubject</code> called <code>text</code> reflects the current value of the input field. On every keystroke, <code>onInput</code> emits an event, <code>.value</code> extracts the string from the input field and writes it into <code>text</code>. But the <code>value</code> attribute of the input field also reacts on changes to the reactive variable, which we use to clear the text field. We have a second reactive variable that holds the submitted value after pressing enter.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Subject</span>
+<span class="hljs-keyword">import</span> org.scalajs.dom.ext.<span class="hljs-type">KeyCode</span>
+
+<span class="hljs-comment">// Emitterbuilders can be extracted and reused!</span>
+<span class="hljs-keyword">val</span> onEnter = onKeyDown
+    .filter(e =&gt; e.keyCode == <span class="hljs-type">KeyCode</span>.<span class="hljs-type">Enter</span>)
+    .preventDefault
+
+<span class="hljs-keyword">val</span> component = {
+  <span class="hljs-keyword">val</span> text = <span class="hljs-type">Subject</span>.behavior(<span class="hljs-string">""</span>)
+  <span class="hljs-keyword">val</span> submitted = <span class="hljs-type">Subject</span>.behavior(<span class="hljs-string">""</span>)
+  div(
+      input(
+        tpe := <span class="hljs-string">"text"</span>,
+        value &lt;-- text,
+        onInput.value --&gt; text,
+        onEnter(text) --&gt; submitted,
+      ),
+      button(<span class="hljs-string">"clear"</span>, onClick.use(<span class="hljs-string">""</span>) --&gt; text),
+      div(<span class="hljs-string">"text: "</span>, text),
+      div(<span class="hljs-string">"length: "</span>, text.map(_.length)),
+      div(<span class="hljs-string">"submitted: "</span>, submitted),
+   )
+}
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
 </code></pre>
+<div id="mdoc-html-run66" data-mdoc-js></div>
+<p>Another example with <code>debounce</code> functionality. The <code>debounced</code> reactive variable is filled once you stop typing for 500ms.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Subject</span>
+<span class="hljs-keyword">import</span> org.scalajs.dom.ext.<span class="hljs-type">KeyCode</span>
+
+<span class="hljs-keyword">val</span> component = {
+  <span class="hljs-keyword">val</span> text = <span class="hljs-type">Subject</span>.behavior(<span class="hljs-string">""</span>)
+  <span class="hljs-keyword">val</span> debounced = <span class="hljs-type">Subject</span>.behavior(<span class="hljs-string">""</span>)
+  div(
+      input(
+        tpe := <span class="hljs-string">"text"</span>,
+        onInput.value --&gt; text,
+        onKeyDown(text).debounceMillis(<span class="hljs-number">500</span>) --&gt; debounced,
+      ),
+      div(<span class="hljs-string">"text: "</span>, text),
+      div(<span class="hljs-string">"debounced: "</span>, debounced),
+   )
+}
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
+</code></pre>
+<div id="mdoc-html-run67" data-mdoc-js></div>
+<h3><a class="anchor" aria-hidden="true" id="global-events"></a><a href="#global-events" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global events</h3>
+<p>There are helpers for getting streams of global <code>document</code> or <code>window</code> events as a handy <code>colibri.Observable</code>:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Observable</span>
+<span class="hljs-keyword">import</span> org.scalajs.dom.document
+
+<span class="hljs-keyword">val</span> component = {
+  <span class="hljs-keyword">val</span> onBlur = events.window.onBlur.map(_ =&gt; <span class="hljs-string">"blur"</span>)
+  <span class="hljs-keyword">val</span> onFocus = events.window.onFocus.map(_ =&gt; <span class="hljs-string">"focus"</span>)
+  div(
+    div(<span class="hljs-string">"document.onKeyDown: "</span>, events.document.onKeyDown.map(_.key)),
+    div(<span class="hljs-string">"window focus: "</span>, <span class="hljs-type">Observable</span>.merge(onBlur, onFocus))
+  )
+}
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
+</code></pre>
+<div id="mdoc-html-run68" data-mdoc-js></div>
+<h2><a class="anchor" aria-hidden="true" id="referential-transparency"></a><a href="#referential-transparency" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Referential transparency</h2>
+<p>When looking at our counter component, you might have noticed that the reactive variable <code>number</code> is instantiated immediately. It belongs to our component value <code>counter</code>. Let's see what happens when we're using this component twice:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Subject</span>
+<span class="hljs-keyword">val</span> counter = {
+  <span class="hljs-keyword">val</span> number = <span class="hljs-type">Subject</span>.behavior(<span class="hljs-number">0</span>)
+  div(
+      button(number, onClick(number.map(_ + <span class="hljs-number">1</span>)) --&gt; number),
+   )
+}
+
+<span class="hljs-keyword">val</span> component = {
+  div(
+    <span class="hljs-string">"Counters sharing state:"</span>,
+    counter,
+    counter
+  )
+}
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
+</code></pre>
+<div id="mdoc-html-run69" data-mdoc-js></div>
+<p>As you can see, the state is shared between all usages of the component. Therefore, the component counter is not referentially transparent. We can change this, by wrapping the component in <code>IO</code> (or here: <code>SyncIO</code> for immediate rendering). With this change, the reactive variable <code>number</code> is instantiated separately for every usage at rendering time:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Subject</span>
+<span class="hljs-keyword">import</span> cats.effect.<span class="hljs-type">SyncIO</span>
+
+<span class="hljs-keyword">val</span> counter = <span class="hljs-type">SyncIO</span> { <span class="hljs-comment">// &lt;-- added IO</span>
+  <span class="hljs-keyword">val</span> number = <span class="hljs-type">Subject</span>.behavior(<span class="hljs-number">0</span>)
+  div(
+      button(number, onClick(number.map(_ + <span class="hljs-number">1</span>)) --&gt; number),
+   )
+}
+
+<span class="hljs-keyword">val</span> component = {
+  div(
+    <span class="hljs-string">"Referentially transparent counters:"</span>,
+    counter,
+    counter
+  )
+}
+
+<span class="hljs-type">OutWatch</span>.renderInto[<span class="hljs-type">IO</span>](preview, component).unsafeRunSync()
+</code></pre>
+<div id="mdoc-html-run70" data-mdoc-js></div>
+<p>Why should we care? Because referentially transparent components can easily be refactored without affecting the meaning of the program. Therefore it is easier to reason about them. Read more about the concept in Wikipedia: <a href="https://en.wikipedia.org/wiki/Referential_transparency">Referential transparency</a></p>
 <h3><a class="anchor" aria-hidden="true" id="rendering-async-effects"></a><a href="#rendering-async-effects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rendering Async Effects</h3>
 <p>You can render any <code>cats.effect.Effect</code> type like <code>cats.effect.IO</code> or <code>monix.eval.Task</code>. The effect will be run async whenever an element is rendered with this modifier. So you can do:</p>
-<pre><code class="hljs css language-scala">div(
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> cats.effect.<span class="hljs-type">IO</span>
+
+div(
   <span class="hljs-type">IO</span> {
-    doSomething
+    <span class="hljs-comment">// doSomething</span>
+    <span class="hljs-string">"result"</span>
   }
 )
 </code></pre>
 <p>If you have an effect that is synchronous in nature, you should consider using a sync effect type instead for performance reasons. A sync effect can be rendered in one go, whereas an async effect might need to patch the dom after it is finished.</p>
 <h3><a class="anchor" aria-hidden="true" id="rendering-sync-effects"></a><a href="#rendering-sync-effects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rendering Sync Effects</h3>
 <p>You can render synchronous effects like <code>cats.effect.SyncIO</code> or <code>monix.eval.Coeval</code> as well (we currently use our own typeclass <code>colibri.effect.RunSyncEffect</code> and will port to <code>cats.effect.SyncEffect</code> as soon as it is available). The effect will be run sync whenever an element is rendered with this modifier. Example:</p>
-<pre><code class="hljs css language-scala">div(
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> cats.effect.<span class="hljs-type">SyncIO</span>
+
+div(
   <span class="hljs-type">SyncIO</span> {
-    doSomething
+    <span class="hljs-comment">// doSomething</span>
+    <span class="hljs-string">"result"</span>
   }
 )
 </code></pre>
 <p>Alternatively you can do the following to achieve the same effect:</p>
 <pre><code class="hljs css language-scala">div(
   <span class="hljs-type">VDomModifier</span>.delay {
-    doSomething
-  }
-)
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="rendering-futures"></a><a href="#rendering-futures" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rendering Futures</h3>
-<p>You can render Futures as well:</p>
-<pre><code class="hljs css language-scala">div(
-  <span class="hljs-type">Future</span> {
-    doSomething
+    <span class="hljs-comment">// doSomething</span>
+    <span class="hljs-string">"result"</span>
   }
 )
 </code></pre>
@@ -538,69 +660,77 @@ If you do not care about this, you could use <code>Handler.unsafe</code> or crea
 <h3><a class="anchor" aria-hidden="true" id="accessing-the-dom-element"></a><a href="#accessing-the-dom-element" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Accessing the DOM Element</h3>
 <p>Sometimes you need to access the underlying DOM element of a component. But a VNode in OutWatch is just a description of a dom element and we can create multiple different elements from one VNode. Therefore, there is no static element attached to a component. Though, you can get access to the dom element via hooks (callbacks):</p>
 <pre><code class="hljs css language-scala">div(
-    onDomMount.foreach { element =&gt; <span class="hljs-comment">// the element into which this node is mounted</span>
-        ???
-    },
-    onDomUnmount.foreach { element =&gt; <span class="hljs-comment">// the element from which this node is unmounted</span>
-        ???
-    }
+  onDomMount.foreach { element =&gt; <span class="hljs-comment">// the element into which this node is mounted</span>
+      ???
+  },
+  onDomUnmount.foreach { element =&gt; <span class="hljs-comment">// the element from which this node is unmounted</span>
+      ???
+  }
 )
 </code></pre>
-<p>We have a higher-level API to work with these kinds of callbacks, called <code>managedElement</code>, which can be used like this:</p>
+<p>Outwatch has a higher-level API to work with these kinds of callbacks, called <code>managedElement</code>, which can be used like this:</p>
 <pre><code class="hljs css language-scala">div(
-    managedElement { element =&gt; <span class="hljs-comment">// the element into which this node is mounted</span>
-        ??? <span class="hljs-comment">// do something with the dom element</span>
-        cancelable(() =&gt; ???) <span class="hljs-comment">// cleanup when the dom element is unmounted</span>
-    }
+  managedElement { element =&gt; <span class="hljs-comment">// the element into which this node is mounted</span>
+    ??? <span class="hljs-comment">// do something with the dom element</span>
+    cancelable(() =&gt; ???) <span class="hljs-comment">// cleanup when the dom element is unmounted</span>
+  }
 )
 </code></pre>
 <p>You can also get the current element when handling dom events, for example onClick:</p>
 <pre><code class="hljs css language-scala">div(
-    onClick.asElement.foreach { element =&gt;
-        ???
-    } <span class="hljs-comment">// this is the same as onClick.map(_.currentTarget)</span>
+  onClick.asElement.foreach { element =&gt;
+    ???
+  } <span class="hljs-comment">// this is the same as onClick.map(_.currentTarget)</span>
 )
 </code></pre>
 <p>If the emitter does not emit events or elements, but you still want to access the current element, you can combine it with another emitter. For example:</p>
-<pre><code class="hljs css language-scala">div(
-    emitter(someObservable).useLatestEmitter(onDomMount).foreach { element =&gt;
-        ???
-    }
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.<span class="hljs-type">Observable</span>
+
+<span class="hljs-keyword">val</span> someObservable:<span class="hljs-type">Observable</span>[<span class="hljs-type">Int</span>] = ???
+div(
+  emitter(someObservable).useLatestEmitter(onDomMount).foreach { element =&gt;
+    ???
+    ()
+  }
 )
 </code></pre>
 <p>If you need an HTML or SVG Element instead of just an Element, you can do:</p>
-<pre><code class="hljs css language-scala">onDomMount.asHtml --&gt; ???
-onDomMount.asSvg --&gt; ???
-onClick.asHtml --&gt; ???
-onClick.asSvg --&gt; ???
-managedElement.asHtml { ??? }
-managedElement.asSvg { ??? }
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> org.scalajs.dom._
+
+onDomMount.asHtml.foreach{ (elem: html.<span class="hljs-type">Element</span>) =&gt; ??? }
+onDomMount.asSvg.foreach{ (elem: svg.<span class="hljs-type">Element</span>) =&gt; ??? }
+onClick.asHtml.foreach{ (elem: html.<span class="hljs-type">Element</span>) =&gt; ??? }
+onClick.asSvg.foreach{ (elem: svg.<span class="hljs-type">Element</span>) =&gt; ??? }
+managedElement.asHtml { (elem: html.<span class="hljs-type">Element</span>) =&gt; ???; cancelable(() =&gt; ???) }
+managedElement.asSvg { (elem: svg.<span class="hljs-type">Element</span>) =&gt; ???; cancelable(() =&gt; ???) }
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="using-other-streaming-libraries"></a><a href="#using-other-streaming-libraries" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using other streaming libraries</h3>
-<p>We use the library <a href="https://github.com/cornerman/colibri"><code>colibri</code></a> for a minimal reactive library and for typeclasses around streaming. These typeclasses like <code>Source</code> and <code>Sink</code> allow to integrate third-party libraries for streaming easily.</p>
-<p>For using outwatch with monix:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.ext.monix._
-<span class="hljs-keyword">import</span> outwatch.reactive.handlers.monix._ <span class="hljs-comment">// for handler factories</span>
+<h3><a class="anchor" aria-hidden="true" id="custom-emitterbuilders"></a><a href="#custom-emitterbuilders" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom EmitterBuilders</h3>
+<p>You can <code>combine</code>, <code>map</code>, <code>collect</code>, <code>filter</code> and <code>transform</code> <code>EmitterBuilder</code>:</p>
+<pre><code class="hljs css language-scala">button(<span class="hljs-type">EmitterBuilder</span>.combine(onMouseUp.use(<span class="hljs-literal">false</span>), onMouseDown.use(<span class="hljs-literal">true</span>)).foreach { isDown =&gt; println(<span class="hljs-string">"Button is down? "</span> + isDown) })
+<span class="hljs-comment">// this is the same as: button(EmitterBuilder.combine(onMouseUp.map(_ =&gt; false), onMouseDown.map(_ =&gt; true)).foreach { isDown =&gt; println("Button is down? " + isDown })</span>
 </code></pre>
-<p>For using outwatch with scala.rx:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> colibri.ext.rx._
-</code></pre>
+<p>Furthermore, you can create EmitterBuilders from streams with <code>emitter(stream)</code> (<code>EmitterBuilder.ofSource</code>) or create custom EmitterBuilders with <code>EmitterBuilder.ofModifier</code>, <code>EmitterBuilder.ofNode</code> or <code>EmitterBuilder.apply</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="debugging"></a><a href="#debugging" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Debugging</h2>
 <p>Source Code: <a href="https://github.com/OutWatch/outwatch/blob/master/outwatch/src/main/scala/outwatch/helpers/OutwatchTracing.scala">OutwatchTracing.scala</a></p>
 <h3><a class="anchor" aria-hidden="true" id="tracing-snabbdom-patches"></a><a href="#tracing-snabbdom-patches" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tracing snabbdom patches</h3>
-<p>Show what patches snabbdom emits:</p>
-<pre><code class="hljs css language-scala">helpers.<span class="hljs-type">OutwatchTracing</span>.patch.zipWithIndex.foreach { <span class="hljs-keyword">case</span> (proxy, index) =&gt;
-  org.scalajs.dom.console.log(<span class="hljs-string">s"Snabbdom patch (<span class="hljs-subst">$index</span>)!"</span>, <span class="hljs-type">JSON</span>.parse(<span class="hljs-type">JSON</span>.stringify(proxy)), proxy)
+<p>Show which patches snabbdom emits:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> scala.scalajs.js.<span class="hljs-type">JSON</span>
+<span class="hljs-keyword">import</span> org.scalajs.dom.console
+
+helpers.<span class="hljs-type">OutwatchTracing</span>.patch.zipWithIndex.foreach { <span class="hljs-keyword">case</span> (proxy, index) =&gt;
+  console.log(<span class="hljs-string">s"Snabbdom patch (<span class="hljs-subst">$index</span>)!"</span>, <span class="hljs-type">JSON</span>.parse(<span class="hljs-type">JSON</span>.stringify(proxy)), proxy)
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="tracing-exceptions-in-your-components"></a><a href="#tracing-exceptions-in-your-components" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tracing exceptions in your components</h3>
 <p>Dynamic components with <code>Observables</code> can have errors. This is if <code>onError</code> is called on the underlying <code>Observer</code>. You can trace them in OutWatch with:</p>
-<pre><code class="hljs css language-scala">helpers.<span class="hljs-type">OutwatchTracing</span>.error.foreach { <span class="hljs-keyword">case</span> throwable =&gt;
-  org.scalajs.dom.console.log(<span class="hljs-string">s"Exception while patching an Outwatch compontent: <span class="hljs-subst">${throwable.getMessage}</span>"</span>)
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> org.scalajs.dom.console
+
+helpers.<span class="hljs-type">OutwatchTracing</span>.error.foreach { <span class="hljs-keyword">case</span> throwable =&gt;
+  console.log(<span class="hljs-string">s"Exception while patching an Outwatch compontent: <span class="hljs-subst">${throwable.getMessage}</span>"</span>)
 }
 </code></pre>
 <script type="text/javascript" src="assets/jsdocs-opt-library.js" defer></script>
 <script type="text/javascript" src="assets/jsdocs-opt-loader.js" defer></script>
 <script type="text/javascript" src="assets/readme.md.js" defer></script>
 <script type="text/javascript" src="assets/mdoc.js" defer></script>
-</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#getting-started">Getting started</a><ul class="toc-headings"><li><a href="#start-with-a-template">Start with a template</a></li><li><a href="#create-a-project-from-scratch">Create a project from scratch</a></li><li><a href="#use-common-javascript-libraries-with-outwatch">Use common javascript libraries with OutWatch</a></li></ul></li><li><a href="#examples">Examples</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#interactive-counter">Interactive Counter</a></li><li><a href="#static-content">Static Content</a><ul class="toc-headings"><li><a href="#imports">Imports</a></li><li><a href="#concatenating-strings">Concatenating Strings</a></li><li><a href="#nesting">Nesting</a></li><li><a href="#primitives">Primitives</a></li><li><a href="#attributes">Attributes</a></li><li><a href="#styles">Styles</a></li><li><a href="#reserved-scala-keywords-class-for">Reserved Scala keywords: class, for</a></li><li><a href="#overriding-attributes">Overriding attributes</a></li><li><a href="#css-class-accumulation">CSS class accumulation</a></li><li><a href="#custom-attributes-styles-and-tags">Custom attributes, styles and tags</a></li><li><a href="#data-and-aria-attributes">Data and Aria attributes</a></li><li><a href="#svg">SVG</a></li><li><a href="#vnode-and-vdommodifier">VNode and VDomModifier</a></li><li><a href="#grouping-modifiers">Grouping Modifiers</a></li><li><a href="#components">Components</a></li><li><a href="#transforming-components">Transforming Components</a></li><li><a href="#use-case-flexbox">Use-Case: Flexbox</a></li><li><a href="#option-and-seq">Option and Seq</a></li><li><a href="#rendering-custom-types">Rendering Custom Types</a></li></ul></li><li><a href="#dynamic-content">Dynamic Content</a><ul class="toc-headings"><li><a href="#reactive-programming">Reactive Programming</a></li><li><a href="#reactive-attributes">Reactive attributes</a></li><li><a href="#reactive-modifiers-and-vnodes">Reactive Modifiers and VNodes</a></li><li><a href="#handling-events">Handling Events</a></li><li><a href="#managing-dynamic-state">Managing dynamic state</a></li><li><a href="#lifecycle-mangement">Lifecycle Mangement</a></li><li><a href="#rendering-async-effects">Rendering Async Effects</a></li><li><a href="#rendering-sync-effects">Rendering Sync Effects</a></li><li><a href="#rendering-futures">Rendering Futures</a></li></ul></li><li><a href="#advanced">Advanced</a><ul class="toc-headings"><li><a href="#accessing-the-dom-element">Accessing the DOM Element</a></li><li><a href="#using-other-streaming-libraries">Using other streaming libraries</a></li></ul></li><li><a href="#debugging">Debugging</a><ul class="toc-headings"><li><a href="#tracing-snabbdom-patches">Tracing snabbdom patches</a></li><li><a href="#tracing-exceptions-in-your-components">Tracing exceptions in your components</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><a href="https://gitter.im/outwatch/Lobby">Gitter Chat</a></div><div><a href="https://github.com/outwatch/outwatch">GitHub</a><a class="github-button" href="https://github.com/outwatch/outwatch" data-icon="octicon-star" data-count-href="/outwatch/outwatch/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2021 Outwatch contributors</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#getting-started">Getting started</a><ul class="toc-headings"><li><a href="#start-with-a-template">Start with a template</a></li><li><a href="#create-a-project-from-scratch">Create a project from scratch</a></li><li><a href="#use-common-javascript-libraries-with-outwatch">Use common javascript libraries with OutWatch</a></li></ul></li><li><a href="#examples">Examples</a></li><li><a href="#hello-world">Hello World</a></li><li><a href="#interactive-counter">Interactive Counter</a></li><li><a href="#static-content">Static Content</a><ul class="toc-headings"><li><a href="#imports">Imports</a></li><li><a href="#concatenating-strings">Concatenating Strings</a></li><li><a href="#nesting">Nesting</a></li><li><a href="#primitives">Primitives</a></li><li><a href="#attributes">Attributes</a></li><li><a href="#styles">Styles</a></li><li><a href="#reserved-scala-keywords-class-for">Reserved Scala keywords: class, for</a></li><li><a href="#overriding-attributes">Overriding attributes</a></li><li><a href="#css-class-accumulation">CSS class accumulation</a></li><li><a href="#custom-attributes-styles-and-tags">Custom attributes, styles and tags</a></li><li><a href="#data-and-aria-attributes">Data and Aria attributes</a></li><li><a href="#svg">SVG</a></li><li><a href="#vnode-and-vdommodifier">VNode and VDomModifier</a></li><li><a href="#grouping-modifiers">Grouping Modifiers</a></li><li><a href="#components">Components</a></li><li><a href="#transforming-components">Transforming Components</a></li><li><a href="#example-flexbox">Example: Flexbox</a></li><li><a href="#option-and-seq">Option and Seq</a></li><li><a href="#rendering-custom-types">Rendering Custom Types</a></li></ul></li><li><a href="#dynamic-content">Dynamic Content</a><ul class="toc-headings"><li><a href="#reactive-programming">Reactive Programming</a></li><li><a href="#reactive-attributes">Reactive attributes</a></li><li><a href="#reactive-modifiers-and-vnodes">Reactive Modifiers and VNodes</a></li><li><a href="#rendering-futures">Rendering Futures</a></li><li><a href="#higher-order-reactiveness">Higher Order Reactiveness</a></li><li><a href="#using-other-streaming-libraries">Using other streaming libraries</a></li><li><a href="#dom-lifecycle-mangement">Dom Lifecycle Mangement</a></li></ul></li><li><a href="#handling-events">Handling Events</a><ul class="toc-headings"><li><a href="#example-counter">Example: Counter</a></li><li><a href="#example-input-field">Example: Input field</a></li><li><a href="#global-events">Global events</a></li></ul></li><li><a href="#referential-transparency">Referential transparency</a><ul class="toc-headings"><li><a href="#rendering-async-effects">Rendering Async Effects</a></li><li><a href="#rendering-sync-effects">Rendering Sync Effects</a></li></ul></li><li><a href="#advanced">Advanced</a><ul class="toc-headings"><li><a href="#accessing-the-dom-element">Accessing the DOM Element</a></li><li><a href="#custom-emitterbuilders">Custom EmitterBuilders</a></li></ul></li><li><a href="#debugging">Debugging</a><ul class="toc-headings"><li><a href="#tracing-snabbdom-patches">Tracing snabbdom patches</a></li><li><a href="#tracing-exceptions-in-your-components">Tracing exceptions in your components</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><a href="https://gitter.im/outwatch/Lobby">Gitter Chat</a></div><div><a href="https://github.com/outwatch/outwatch">GitHub</a><a class="github-button" href="https://github.com/outwatch/outwatch" data-icon="octicon-star" data-count-href="/outwatch/outwatch/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2021 Outwatch contributors</section></footer></div></body></html>
