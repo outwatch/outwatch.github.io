@@ -18,7 +18,7 @@ addSbtPlugin(<span class="hljs-string">"ch.epfl.scala"</span> % <span class="hlj
 </code></pre>
 <p>Add the outwatch dependencies to your <code>build.sbt</code>:</p>
 <pre><code class="hljs css language-scala">libraryDependencies ++= <span class="hljs-type">Seq</span>(
-  <span class="hljs-string">"io.github.outwatch"</span>   %%% <span class="hljs-string">"outwatch"</span>          % <span class="hljs-string">"1.0.0-RC8"</span>,
+  <span class="hljs-string">"io.github.outwatch"</span>   %%% <span class="hljs-string">"outwatch"</span>          % <span class="hljs-string">"1.0.0-RC9"</span>,
   <span class="hljs-comment">// optional dependencies:</span>
   <span class="hljs-string">"com.github.cornerman"</span> %%% <span class="hljs-string">"colibri-zio"</span>       % <span class="hljs-string">"0.5.0"</span>, <span class="hljs-comment">// zio support</span>
   <span class="hljs-string">"com.github.cornerman"</span> %%% <span class="hljs-string">"colibri-fs2"</span>       % <span class="hljs-string">"0.5.0"</span>, <span class="hljs-comment">// fs2 support</span>
@@ -354,7 +354,7 @@ component.showHTMLForDoc(docPreview)
 
 <span class="hljs-keyword">val</span> duration = <span class="hljs-number">1.</span>second
 <span class="hljs-keyword">val</span> durationMillis = duration.toMillis.toInt
-<span class="hljs-keyword">val</span> zioDuration = zio.duration.<span class="hljs-type">Duration</span>.fromScala(<span class="hljs-number">1.</span>second)
+<span class="hljs-keyword">val</span> zioDuration = zio.<span class="hljs-type">Duration</span>.fromScala(<span class="hljs-number">1.</span>second)
 
 <span class="hljs-keyword">val</span> component = {
   div(
@@ -372,7 +372,7 @@ component.showHTMLForDoc(docPreview)
     ),
     div(
       <span class="hljs-string">"Stream (zio): "</span>,
-      zio.stream.<span class="hljs-type">Stream</span>.tick(zioDuration).as(<span class="hljs-number">1</span>).scan[<span class="hljs-type">Int</span>](<span class="hljs-number">0</span>)(_ + _),
+      zio.stream.<span class="hljs-type">ZStream</span>.tick(zioDuration).as(<span class="hljs-number">1</span>).scan[<span class="hljs-type">Int</span>](<span class="hljs-number">0</span>)(_ + _),
     )
   )
 }
@@ -452,7 +452,7 @@ component.showHTMLForDoc(docPreview)
 <span class="hljs-comment">// import cats.effect.unsafe.Runtime.default</span>
 
 <span class="hljs-keyword">import</span> colibri.ext.zio._
-<span class="hljs-keyword">import</span> zio.<span class="hljs-type">Task</span>
+<span class="hljs-keyword">import</span> zio.<span class="hljs-type">ZIO</span>
 <span class="hljs-comment">// import zio.Runtime.default</span>
 
 div(
@@ -460,7 +460,7 @@ div(
     <span class="hljs-comment">// doSomething</span>
     <span class="hljs-string">"result from IO"</span>
   },
-  <span class="hljs-type">Task</span> {
+  <span class="hljs-type">ZIO</span>.attempt {
     <span class="hljs-comment">// doSomething</span>
     <span class="hljs-string">"result from ZIO"</span>
   }
